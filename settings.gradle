@@ -1,0 +1,8 @@
+include ':app', ':rnproject', ':react-native-filesystem', ':react-native-pdf', ':react-native-image-picker', ':react-native-fs', ':react-native-sounds', ':react-native-touch-id', ':react-native-vector-icons', ':react-native-sqlite-storage', ':react-native-xmpp', ':rn-fetch-blob', ':react-native-xinge-push', ':react-native-doc-viewer', ':react-native-android-statusbar',
+        ':gesturehandler',
+        ':rnapkinstaller',
+        ':rnaudio',
+        ':react-native-camera',
+        ':react-native-device-info',
+        ':react-native-file-picker'
+

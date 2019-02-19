@@ -1,0 +1,569 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"><meta name="format-detection" content="telephone=no">
+    <title>calendar</title>
+	<link rel="stylesheet" href="lib/agile/css/agile.layout.css">
+	<link rel="stylesheet" href="lib/third/seedsui/plugin/seedsui/seedsui.min.css">
+	<link rel="stylesheet" href="css/main.css">
+</head>
+<style>
+.weekwbtn{ padding: 10px; }
+.weekwbtn button{ font-size: 14px; }/*//line-height: 28px; float: right;*/
+	.month-block{
+		background-color: #ffffff;
+	}
+	.day{
+		background-color: #ffffff;
+		color: #b3b3b3;
+	}
+	.not-this-month {
+		color: #dddddd;
+	}
+</style>
+<body>
+<div id="section_container">
+	<section data-role="section" id="page_week" class="active">
+		<header>
+			<div class="titlebar reverse">
+				<a class="titlebar-button" onclick="window.location.href = 'index.html';"><!-- href="javascript:back()"-->
+					<i class="icon icon-arrowleft"></i>返回
+					<!--<i class="icon icon-user"></i>
+                    <span class="text-ellipsis" name="userFullNameText"></span>-->
+				</a>
+				<h1 class="titlebar-title text-center">日程管理</h1>
+				<a class="titlebar-button button white outline loginOutBtn" style="padding:0 8px;visibility: hidden;">
+					<!-- <i class="icon icon-gear size20"></i>-->
+					<label>注销</label>
+				</a>
+			</div>
+		</header>
+
+		<article id="main_article" data-role="article" class="active bg-white" style="top:44px !important;">
+
+			<div class="calendar" id="calender_select_container">
+				<!--<div class="weekwbtn">
+					<button class="bttn radius4" onClick="calendarExpand()">月</button>
+					<button class="bttn radius4" onClick="calendarCollapse()">周</button>
+					<button class="bttn radius4" onClick="today()">今天</button>
+				</div>-->
+				<ul class="list noborder nobg">
+					<li style="padding:10px 0;">
+						<div class="justify arrowleft">
+							<i class="icon icon-arrowleft"></i>
+						</div>
+						<div class="justify-content calendar-title">2016-2-15 周一</div>
+
+
+						<div class="justify arrowright">
+							<i class="icon icon-arrowright"></i>
+						</div>
+					</li>
+				</ul>
+
+				<div class="calender_container">
+					<div class='day'>
+						<div class="week-day-line">
+							<div class="day-name">日</div>
+							<div class="day-name">一</div>
+							<div class="day-name">二</div>
+							<div class="day-name">三</div>
+							<div class="day-name">四</div>
+							<div class="day-name">五</div>
+							<div class="day-name">六</div>
+						</div>
+						<div class="week-day-line">
+							<div class="day-name">日</div>
+							<div class="day-name">一</div>
+							<div class="day-name">二</div>
+							<div class="day-name">三</div>
+							<div class="day-name">四</div>
+							<div class="day-name">五</div>
+							<div class="day-name">六</div>
+						</div>
+					</div>
+					<div class='date_container'>
+						<div class="month_container">
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div >
+				<!--<ul id="calendarlist">-->
+
+				<!--</ul>-->
+				<!--样例-->
+				<div class="sliver">日程安排</div>
+				<ul class="timeline dotted bg-white" id="calendarlist">
+					<!--<li>-->
+
+						<!--<div class="timeline-dot">-->
+							<!--<img src="images/point.png" width="11" height="11">-->
+						<!--</div>-->
+						<!--<div class="justify-content">-->
+							<!--<small class="nowrap">12月7日 周一</small>-->
+							<!--<div class="size20">今日无行程安排</div>-->
+						<!--</div>-->
+					<!--</li>-->
+					<!--<li>
+						&lt;!&ndash;<div class="clock color-1" data-clock="11:24">
+							<div class="hour" style="transform: rotate(330deg);"></div>
+							<div class="minute" style="transform: rotate(144deg);"></div>
+							<div class="origin"></div>
+						</div>&ndash;&gt;
+						<div class="timeline-dot">
+							<img src="images/point.png" width="11" height="11">
+						</div>
+						<div class="justify-content">
+							<small class="nowrap">12月7日 周一</small>
+							<div class="size20">今日无行程安排</div>
+						</div>
+					</li>
+					<li>
+						&lt;!&ndash;<div class="clock color-1" data-clock="11:24">
+							<div class="hour" style="transform: rotate(330deg);"></div>
+							<div class="minute" style="transform: rotate(144deg);"></div>
+							<div class="origin"></div>
+						</div>&ndash;&gt;
+						<div class="timeline-dot">
+							<img src="images/point.png" width="11" height="11">
+						</div>
+						<div class="justify-content">
+							<small class="nowrap">12月7日 周一</small>
+							<div class="size20">今日无行程安排</div>
+						</div>
+					</li>-->
+				</ul>
+			</div>
+		</article>
+	</section>
+	<!--详情-->
+	<section id="calendar-section" data-role="section">
+		<!--头部-->calendar
+		<header>
+			<div class="titlebar reverse">
+				<a class="titlebar-button" onclick="back();" href="javascript:void(0);">
+					<i class="icon icon-arrowleft"></i>返回
+
+				</a>
+				<h1 class="titlebar-title text-center">日程详情</h1>
+				<a class="titlebar-button button white outline loginOutBtn" style="padding:0 8px;visibility: hidden;"
+				   onclick="Util.quitToLoginPage()">
+					<!-- <i class="icon icon-gear size20"></i>-->
+					<label>注销</label>
+				</a>
+			</div>
+
+		</header>
+		<article class="details has-header active det-backcolor" id="calendar-article" data-role="article" data-scroll="vertical"><!--background: url('images/formBackground.png');-->
+			<!--<div id="sliderPageSec" class="full bg-white" data-role="slider">-->
+				<!--<div class="scroller">-->
+					<!--<div id="toDetail" class="full-width">-->
+						<!--<div class="scroller">-->
+							<form>
+								<div class="row">
+									<label class="row-left">标&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;题</label>
+									<div class="row-right " name="eventName">
+
+									</div>
+								</div>
+								<div class="row">
+									<label class="row-left">开始时间</label>
+									<div class="row-right " name="startDate">
+
+									</div>
+								</div>
+								<div class="row">
+									<label class="row-left">结束时间</label>
+									<div class="row-right " name="endDate">
+
+									</div>
+								</div>
+								<div class="row">
+									<label class="row-left">内&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;容</label>
+									<div class="row-right " name="eventDesc">
+
+									</div>
+								</div>
+							</form>
+						<!--</div>-->
+					<!--</div>-->
+				<!--</div>-->
+			<!--</div>-->
+		</article>
+	</section>
+</div>
+<!--- third -->
+<script src="lib/third/jquery/jquery-2.1.3.min.js"></script>
+<script src='./lib/jquery/jquery-ui-1.10.2.custom.min.js'></script>
+<script src="lib/third/iscroll/iscroll-probe.js"></script>
+<!---  agile -->
+<script type="text/javascript" src="lib/agile/js/agile.js"></script>
+<script type="text/javascript" src="lib/agile/js/exmobi.js"></script>
+<script type="text/javascript" src="lib/agile/js/agile.exmobi.js"></script>
+<script src="cordova.js"></script>
+<!-- app -->
+<script type="text/javascript" src="lib/app/js/app.seedsui.js"></script>
+
+<script type="text/javascript" src="lib/custom/properties.js"></script>
+<script type="text/javascript" src="lib/custom/ui.js"></script>
+<script type="text/javascript" src="lib/custom/util.js"></script>
+<script type="text/javascript" src="lib/agile/js/seedsui.min.js"></script>
+	<script>
+        var uuid;
+        var time;
+        var click="1";
+        //转换成要求的时间格式
+        Date.prototype.Format = function (fmt) { //author: meizz
+            var o = {
+                "M+": this.getMonth() + 1, //月份
+                "d+": this.getDate(), //日
+                "h+": this.getHours(), //小时
+                "m+": this.getMinutes(), //分
+                "s+": this.getSeconds(), //秒
+                "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+                "S": this.getMilliseconds() //毫秒
+            };
+            if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+            for (var k in o)
+                if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+            return fmt;
+        }
+        //默认加载第一页和刷新方法
+        function refreshList(data) {
+            Util.redirectLogin(data.result);
+            showConsole(data.length)  ;      //Util.redirectLogin(data.result);
+            $('#calendarlist').html("");
+            if(data!=null && data.length > 0){
+                $('#calendarlist').addClass('timeline dotted');
+                var htmlStr = "";
+                showConsole(data[0])  ;
+                for(var i=0;i < data.length;i++){
+                    var item = data[i];
+//                    htmlStr+= '<li onclick="showCAlendarInfo(\''+item.id+'\')" class="dept-parent-line">'//'&attr1='+item.attr1+
+//                        +'<p><i class="bg-warn radiusround size18"></i><span class="lrmargin8 text-ellipsis-black">'+item['start_date']+'</span></p>'
+//                        +'<p class="list-font ml16">'
+//                        +'<span class="text-ellipsis-black size16" style="width: 100px;color: #aaaaaa;">'
+//                        +item['text']
+////                         +'至'
+////						+item['end_date']
+//                        +'</span>'
+//                        +'</p>'
+//                        +'</li>';
+
+
+                    htmlStr+= ' <li onclick="showCAlendarInfo(\''+item.id+'\')">';
+                    htmlStr+= ' <div class="timeline-dot">';
+                    htmlStr+= ' <img src="images/point.png" width="11" height="11">';
+                    htmlStr+= ' </div>';
+                    htmlStr+= ' <div class="justify-content">';
+                    htmlStr+= ' <small class="nowrap">'+getWeekDate(item.start_date)+'</small>';
+                    htmlStr+= ' <div class="size20">'+item['text']+'</div>';
+                    htmlStr+= ' </div>';
+                    htmlStr+= ' </li>';
+                }
+                $('#calendarlist').empty().html(htmlStr);
+            }else{
+                $('#calendarlist').removeClass('timeline dotted');
+                $('#calendarlist').html('<span class=\"pl8\">暂无安排~</span>');
+                showConsole("没有数据")  ;
+			}
+
+        }
+
+        function getcalendarlists(){
+
+            getListByType(refreshList,{isShow:false})
+        }
+        //列表请求
+        function getListByType(callback,loadingObj){
+            getDataByAjax({
+                //url:'http://192.168.81.17:8080/oa/MobileFlow/getDayPersonAgenda',
+                url:base +'MobileFlow/getDayPersonAgenda',
+                data : {
+                    datetime:time,
+                    type:"1",
+                    ticket:Util.getItem('ticket'),
+                    uuid : Util.getItem('uuid'),
+                    orgid:Util.getItem('orgid'),
+                }
+            },callback,loadingObj);
+        }
+
+
+        function back() {
+            history.go(-1);
+        }
+        var tempWeekSelectObject = new DateSelect({
+                activeDate: new Date()
+            }),
+            tempDivId = "calender_select_container";
+        var tempCalenderObject = new Calender({
+            dateSelectObject: tempWeekSelectObject,
+            mode:'month',
+            containerDivId: tempDivId,
+            onChange: function(date) {
+                //触发调父页面的方法
+                click="0";
+               time= date.Format("yyyy-MM-dd");
+                showConsole("点击日程执行查询方法"+time);
+                getcalendarlists();
+            }
+        });
+/*        function calendarCollapse(){
+            tempCalenderObject.switchToWeek();
+        }
+        function calendarExpand(){
+            tempCalenderObject.switchToMonth();
+        }
+        function today(){
+            tempCalenderObject.jumpToDate(new Date());
+
+        }
+       */
+        var formatDateTime = function (date) {
+            var y = date.getFullYear();
+            var m = date.getMonth() + 1;
+            m = m < 10 ? ('0' + m) : m;
+            var d = date.getDate();
+            d = d < 10 ? ('0' + d) : d;
+            var h = date.getHours();
+            var minute = date.getMinutes();
+            minute = minute < 10 ? ('0' + minute) : minute;
+            return y + '-' + m + '-' + d;
+        };
+        //页面初始化
+        Util.deviceReady(function () {
+            uuid = device.uuid;
+            time=new Date().Format("yyyy-MM-dd");
+            showConsole("页面进来执行查询方法"+time);
+            getDataByAjax({
+                 url:base +'MobileFlow/getDayPersonAgenda',
+                //url:'http://192.168.81.17:8080/oa/MobileFlow/getDayPersonAgenda',
+                data : {
+                    type : '1',
+                    ticket:Util.getItem('ticket'),
+                    datetime:time,
+                    uuid : Util.getItem('uuid'),
+                    orgid:Util.getItem('orgid'),
+                }
+            },refreshList,{isShow:false});
+        });
+		//打开日程详情页
+        function showCAlendarInfo(id){
+            showConsole("打印ID："+id);
+            A.Controller.section('calendar-section.html?id='+id);
+        }
+
+        $('#page_week').on('sectionshow', function(){
+            initBackKeyDown(2);
+        });
+        $('#calendar-section').on('sectionshow', function(){
+            var params = A.Component.params(this); //获取所有参数，此处为{'id':'1'}
+            var id= params.id;
+            showConsole("获取详情ID："+id);
+            //detailId = id;
+
+//            A.Slider('#sliderPageSec').destroy();
+//            A.Slider('#sliderPageSec', {
+//                dots : 'hide',
+//                change: function(index){
+//                    showConsole("index="+index);
+//                    detailType = $('#sliderPageSec [data-role="page"]').eq(index).attr('id');//取出标签的id属性
+//                    showConsole("detailType="+detailType);
+//                    initDetailRefreshConfig();
+//                    LoadDetail(id);
+//                }
+//            });
+            LoadDetail(id);
+            initBackKeyDown(1);
+        });
+        //初始详情
+        function LoadDetail(id){
+            showConsole("获取详情ID："+id);
+            getDataByAjax({
+                url:base +'/MobileFlow/getAgendaView',
+                //url:'http://192.168.81.17:8080/oa/MobileFlow/getAgendaView',
+                data : {
+                    type : '2',
+                    ticket:Util.getItem('ticket'),
+                    id:id,
+                    uuid : Util.getItem('uuid'),
+                    orgid:Util.getItem('orgid'),
+                }
+            },function (data) {
+                Util.redirectLogin(data.result);
+                var cadendar = data.view;
+                showConsole(cadendar);
+                //显示用户详细信息弹出框
+                $('.details').find('[name]').each(function (i,item) {
+                    var name = $(item).attr('name');
+                    showConsole("name:"+name);
+                    if(name == 'eventName'){
+                        $(item).html(cadendar.eventName);
+
+                    }else if(name == 'eventDesc'){
+                        $(item).html(cadendar.eventDesc);
+					}else if(name == 'startDate'){
+                        $(item).html(cadendar.startDate);
+                    }else if(name == 'endDate'){
+                        $(item).html(cadendar.endDate);
+                    }
+                })
+
+
+            },{isShow:false});
+		}
+
+		//做标记 查询回某个月的事件
+		function signThing(signtime) {
+            if(click=="1"){
+
+                /*$.ajax({
+                    type: "POST",
+                    // url:base +'MobileFlow/getPcToJson',
+                    url:'http://192.168.81.15:8083/oa/MobileFlow/getPcToJson',
+                    data : {
+                        type : '1',
+                        ticket:Util.getItem('ticket'),
+                        start_date:signtime,
+                        uuid : uuid,
+                        orgid:Util.getItem('orgid'),
+                    },
+                    async: true,
+                    error:function(e){
+                        alert("网络异常")
+                    },
+                    success: function(data) {
+                        showConsole("查询结果："+data.length)
+                        data.length=1
+                        if(data!=null&&data.length>0){
+                            for(var i=0;i<data.length;i++ ){
+                                var r="2017-09-17 08:10";//data[i].start_date+"";
+                                showConsole("r:"+r);
+                                var datas=r.split(" ")//
+                               var rs =datas[0]+"";
+                                rs=rs.substring(rs.lastIndexOf("-")+1,rs.length);
+                                showConsole("rs:"+rs);
+                                showConsole("rs:"+rs<=9);
+                                if(rs<=9){
+                                    rs=rs.substring(1,2);
+                                }
+                                showConsole("rs:"+rs);
+                                $(".day-date ").each(function(i,item){
+                                    if($(item).find("span").html()>0&&$(item).find("span").html()<=31){
+
+                                        if($(item).find("span").hasClass("not-this-month")){
+
+                                        }else{
+                                            showConsole("加点操作"+$(item).find("span").html()==rs);
+
+                                            if($(item).find("span").html()==rs){
+                                                showConsole('●');
+                                                $(item).prepend('●');
+
+                                            }
+                                        }
+                                    }
+
+                                })
+                            }
+
+                        }
+                    }
+
+                });*/
+                /*getDataByAjax({
+                     // url:base +'MobileFlow/getPcToJson',
+                     url:'http://192.168.81.15:8083/oa/MobileFlow/getPcToJson',
+                     data : {
+                         type : '1',
+                         ticket:Util.getItem('ticket'),
+                         datetime:signtime,
+                         uuid : uuid,
+                         orgid:Util.getItem('orgid'),
+                     }
+                 },function(data){
+                    showConsole(data);
+
+
+
+                 },{isShow:false});*/
+			}
+
+        }
+
+        function initDetailRefreshConfig(){
+            refreshDetail1.setConfig({
+                pullDownOpts : {
+                    normalLabel : '下拉刷新',
+                    releaseLabel : '释放刷新',
+                    refreshLabel : '加载中...'
+                }
+            });
+            refreshDetail2.setConfig({
+                pullDownOpts : {
+                    normalLabel : '下拉刷新',
+                    releaseLabel : '释放刷新',
+                    refreshLabel : '加载中...'
+                }
+            });
+            refreshDetail3.setConfig({
+                pullDownOpts : {
+                    normalLabel : '下拉刷新',
+                    releaseLabel : '释放刷新',
+                    refreshLabel : '加载中...'
+                }
+            });
+        }
+        //
+        function getWeekDate(date){
+            var d=new Date(date);
+
+            var t=d.getDay();
+            showConsole("星期："+t);
+            var new_date=new Date(date).Format("yyyy-MM-dd");
+            var context=new_date+" ";
+            if(t==0){
+                context+="周日";
+			}else if(t==1){
+                context+="周一";
+			}else if(t==2){
+                context+="周二";
+            }else if(t==3){
+                context+="周三";
+            }else if(t==4){
+                context+="周四";
+            }else if(t==5){
+                context+="周五";
+            }else if(t==6){
+                context+="周六";
+            }
+            showConsole(context);
+            showConsole(context);
+		return context;
+		}
+        function initBackKeyDown(type){
+            if(type==1){
+                showConsole("绑定返回上页事件:"+type);
+                document.removeEventListener("backbutton", onBackKeyDown, false); // 注销返回键
+                document.removeEventListener("backbutton", exitApp, false); // 注销返回键
+                document.removeEventListener("backbutton", cback, false);//绑定首页
+                document.addEventListener("backbutton", back, false);//绑定返回上页事件
+            }else{
+                showConsole("绑定原始返回键:"+type);
+                document.removeEventListener("backbutton", onBackKeyDown, false); // 注销返回键
+                document.removeEventListener("backbutton", exitApp, false); // 注销返回键
+                document.removeEventListener("backbutton", back, false); // 注销返回上页事件
+                document.addEventListener("backbutton", cback, false);//绑定首页
+            }
+        }
+        function cback(){
+            window.location.href = 'index.html?checkType=no';
+        }
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/gesturehandler" />
+            <option value="$PROJECT_DIR$/react-native-android-statusbar" />
+            <option value="$PROJECT_DIR$/react-native-camera" />
+            <option value="$PROJECT_DIR$/react-native-device-info" />
+            <option value="$PROJECT_DIR$/react-native-doc-viewer" />
+            <option value="$PROJECT_DIR$/react-native-file-picker" />
+            <option value="$PROJECT_DIR$/react-native-filesystem" />
+            <option value="$PROJECT_DIR$/react-native-fs" />
+            <option value="$PROJECT_DIR$/react-native-image-picker" />
+            <option value="$PROJECT_DIR$/react-native-pdf" />
+            <option value="$PROJECT_DIR$/react-native-sounds" />
+            <option value="$PROJECT_DIR$/react-native-sqlite-storage" />
+            <option value="$PROJECT_DIR$/react-native-touch-id" />
+            <option value="$PROJECT_DIR$/react-native-vector-icons" />
+            <option value="$PROJECT_DIR$/react-native-xinge-push" />
+            <option value="$PROJECT_DIR$/react-native-xmpp" />
+            <option value="$PROJECT_DIR$/rn-fetch-blob" />
+            <option value="$PROJECT_DIR$/rnapkinstaller" />
+            <option value="$PROJECT_DIR$/rnaudio" />
+            <option value="$PROJECT_DIR$/rnproject" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>

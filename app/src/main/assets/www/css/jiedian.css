@@ -1,0 +1,161 @@
+.step {
+    counter-reset: flag;
+}
+.step li {
+    position: relative;
+    transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+}
+.step li a {
+    cursor: pointer;
+    padding: 0px 0px;
+    transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+}
+.step li a:before {
+    content: counter(flag);
+    counter-increment: flag;
+    transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+}
+.step li a:after {
+    content: "";
+    transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+}
+.step-square {
+    margin-top: 40px;
+}
+.step-square > li:hover a:before,
+.step-square > li:active a:before,
+.step-square > li.active a:before {
+    background-color: #00b8f5;
+    color: #ffffff;
+    border-color: #00b8f5;
+}
+.step-square > li:hover a:after,
+.step-square > li:active a:after,
+.step-square > li.active a:after {
+    background-color: #00b8f5;
+}
+.step-square > li:first-child a:after {
+    left: 50%;
+    border-right: 1px solid #ffffff;
+}
+.step-square > li:last-child a:after {
+    right: 50%;
+    border-left: 1px solid #ffffff;
+}
+.step-square > li > a {
+    color: #ebebeb;
+}
+.step-square > li > a:hover {
+    background-color: #ffffff;
+    color: #00b8f5;
+}
+.step-square > li > a:before {
+    position: absolute;
+    z-index: 2;
+    top: -231%;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 1rem;
+    height: 1rem;
+    background-color: #ffffff;
+    line-height: 16px;
+    border: 1px solid #ebebeb;
+    border-radius: 50%;
+}
+.step-square > li > a:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -185%;
+    background-color: #ebebeb;
+    z-index: 1;
+    height: 2px;
+    border: solid #ffffff;
+    border-width: 0 1px;
+}
+.step-square > li.active > a,
+.step-square > li.active > a:focus,
+.step-square > li.active > a:hover {
+    color: #00b8f5;
+    background: transparent;
+}
+ol, ul {
+    margin-top: 0;
+    margin-bottom: 12px;
+}
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+user agent stylesheet
+ul, menu, dir {
+    display: block;
+    list-style-type: disc;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    -webkit-padding-start: 40px;
+}
+Inherited from body
+body {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333;
+    background-color: #fff;
+}
+Inherited from html
+html {
+    font-size: 10px;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+html {
+    font-family: sans-serif;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+Pseudo ::before element
+.btn-group-vertical>.btn-group:after, .btn-group-vertical>.btn-group:before, .btn-toolbar:after, .btn-toolbar:before, .clearfix:after, .clearfix:before, .container-fluid:after, .container-fluid:before, .container:after, .container:before, .dl-horizontal dd:after, .dl-horizontal dd:before, .form-horizontal .form-group:after, .form-horizontal .form-group:before, .modal-footer:after, .modal-footer:before, .modal-header:after, .modal-header:before, .nav:after, .nav:before, .navbar-collapse:after, .navbar-collapse:before, .navbar-header:after, .navbar-header:before, .navbar:after, .navbar:before, .pager:after, .pager:before, .panel-body:after, .panel-body:before, .row:after, .row:before {
+    display: table;
+    content: " ";
+}
+:after, :before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+Pseudo ::after element
+.btn-group-vertical>.btn-group:after, .btn-toolbar:after, .clearfix:after, .container-fluid:after, .container:after, .dl-horizontal dd:after, .form-horizontal .form-group:after, .modal-footer:after, .modal-header:after, .nav:after, .navbar-collapse:after, .navbar-header:after, .navbar:after, .pager:after, .panel-body:after, .row:after {
+    clear: both;
+}
+.btn-group-vertical>.btn-group:after, .btn-group-vertical>.btn-group:before, .btn-toolbar:after, .btn-toolbar:before, .clearfix:after, .clearfix:before, .container-fluid:after, .container-fluid:before, .container:after, .container:before, .dl-horizontal dd:after, .dl-horizontal dd:before, .form-horizontal .form-group:after, .form-horizontal .form-group:before, .modal-footer:after, .modal-footer:before, .modal-header:after, .modal-header:before, .nav:after, .nav:before, .navbar-collapse:after, .navbar-collapse:before, .navbar-header:after, .navbar-header:before, .navbar:after, .navbar:before, .pager:after, .pager:before, .panel-body:after, .panel-body:before, .row:after, .row:before {
+    display: table;
+    content: " ";
+}
+:after, :before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.nav-justified {
+    width: 100%;
+}
+.nav {
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
+.nav-justified>li{display:table-cell;width:1%}.nav-justified>li>a{margin-bottom:0}
+.container{text-align: center}

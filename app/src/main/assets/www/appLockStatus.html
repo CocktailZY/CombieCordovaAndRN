@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>设置</title>
+    <link rel="stylesheet" href="lib/agile/css/agile.layout.css">
+    <link rel="stylesheet" href="lib/third/seedsui/plugin/seedsui/seedsui.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <!--- third -->
+    <script src="lib/third/jquery/jquery-2.1.3.min.js"></script>
+
+    <script src="lib/third/jquery/jquery.mobile.custom.min.js"></script>
+    <script src="lib/third/iscroll/iscroll-probe.js"></script>
+    <!--- agile -->
+    <script type="text/javascript" src="lib/agile/js/agile.js"></script>
+    <script src="cordova.js"></script>
+    <!-- h5lock -->
+    <script src="lib/H5lock.js"></script>
+    <!-- app -->
+    <script type="text/javascript" src="lib/app/js/app.seedsui.js"></script>
+    <script src="lib/md5.js"></script>
+    <script type="text/javascript" src="lib/custom/properties.js"></script>
+    <script type="text/javascript" src="lib/custom/util.js"></script>
+    <script type="text/javascript" src="lib/custom/ui.js"></script>
+    <script src="lib/custom/changCss.js"></script>
+    <script type="text/javascript">
+        Util.deviceReady(function () {
+            //检查指纹锁是否可用
+            FingerprintAuth.isAvailable(function (message) {
+                console.log(message);
+                dynamicLoading.css("css/finger_yes.css");
+            }, function (error) {
+                dynamicLoading.css("css/finger_no.css");
+                console.log(error);
+            });
+        })
+        var isLock = Util.getItem('isLock');
+        var appLockPwd = Util.getItem('appLockPwd');
+        var fingerLock = Util.getItem('fingerLock');
+        if (isLock == '0' && fingerLock == '0' && (!appLockPwd || appLockPwd == '')) {
+            //未设置
+            dynamicLoading.css("css/weisetting.css");
+        }else if (isLock == '0' && fingerLock == '0' && appLockPwd && appLockPwd != '') {
+            //未开启
+            dynamicLoading.css("css/noOpen.css");
+        }else if (isLock == '1' && fingerLock == '0') {
+            //已开启手势密码
+            dynamicLoading.css("css/openhands.css");
+        }else if(isLock == '0' && fingerLock == '1'){
+            //已开启指纹锁
+            dynamicLoading.css("css/openfinger.css");
+        }
+    </script>
+
+</head>
+<body>
+<div id="section_container">
+    <!--应用锁-->
+    <section id="applock_section" data-role="section">
+        <!--头部-->
+        <header>
+            <div class="titlebar reverse">
+                <a class="titlebar-button backToSetting">
+                    <!-- href="javascript:back()"-->
+                    <i class="icon icon-arrowleft"></i>返回
+                    <!--<i class="icon icon-user"></i>
+                    <span class="text-ellipsis" name="userFullNameText"></span>-->
+                </a>
+                <h1 class="titlebar-title text-center">设置</h1>
+                <a style="padding:0 8px; visibility: hidden;">
+                    <label>重置</label>
+                </a>
+            </div>
+        </header>
+        <article class="active has-header det-backcolor" id="applock_article" data-role="article">
+            <div style="margin-top:10px;margin-bottom:5px;padding-left:16px;padding-right:16px;">
+                <label style="font-size: smaller;color: #aaa;font-family: monospace;">开启后,进入系统需验证</label>
+            </div>
+            <!--解锁模式-->
+            <div class="full-width bg-white">
+                <div class="lrpadding8">
+                    <!--<div class="justify-content topTip tbpadding8">-->
+                    <!--解锁模式-->
+                    <!--</div>-->
+                    <div id="fingerPwd" class="justify-content clearfix underLine">
+                        <div class="float-left">指纹解锁</div>
+                        <div class="float-right"><i class="icon-hook-fill size16 rightIcon"></i>
+                        </div>
+                    </div>
+                    <div id="handsPwd" class="justify-content clearfix underLine">
+                        <div class="float-left">手势密码解锁</div>
+                        <div class="float-right"><i class="icon-hook-fill size16 rightIcon"></i>
+                        </div>
+                    </div>
+                    <div class="justify-content clearfix" id="closeAppLock">
+                        <div class="float-left">关闭</div>
+                        <div class="float-right"><i class="icon-hook-fill size16 rightIcon"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="full-width bg-white" id="updateAppLock" style="margin-top: 24px;">
+                <div class="lrpadding8">
+                    <div class="justify-content clearfix">
+                        <div class="float-left" id="updateFingerPwd">修改手势密码</div>
+                        <div class="float-right" style="color: #CCCCCC;">
+                            <i class="icon icon-arrowright size16"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </article>
+    </section>
+    <!--原密码确认-->
+    <section id="confirmLoginPwd_section" data-role="section">
+        <!--头部-->
+        <header>
+            <div class="titlebar reverse">
+                <a class="titlebar-button backAppLock">
+                    <!-- href="javascript:back()"-->
+                    <i class="icon icon-arrowleft"></i>取消
+                    <!--<i class="icon icon-user"></i>
+                    <span class="text-ellipsis" name="userFullNameText"></span>-->
+                </a>
+                <h1 class="titlebar-title text-center">请输入登录密码</h1>
+                <a style="padding:0 8px; visibility: hidden;">
+                    <!--<label>重置</label>-->
+                </a>
+            </div>
+        </header>
+        <article class="active has-header det-backcolor" id="confirmLoginPwd_article" data-role="article">
+            <div class="full-width">
+                <form class="bg-white" id="form2" style="margin-bottom: 35px;">
+                    <div class="group noborder" style="margin: 24px 0 !important; padding: 12px !important;">
+                        <div class="row noborder height50">
+                            <label class="row-left width20"><strong>登录密码</strong></label>
+                            <div class="row-right input-box border1d" data-input="reveal">
+                                <input type="password" name="loginpassword" data-rule-field="密码"
+                                       data-rule="required password">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <a class="button block margin8" id="submitLoginPwd" style="background-color: #278EEE;">确认</a>
+            </div>
+        </article>
+    </section>
+</div>
+
+<script type="text/javascript" src="script/appLockStatus.js"></script>
+
+</body>
+</html>

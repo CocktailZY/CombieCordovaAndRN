@@ -1,0 +1,41 @@
+-- Merging decision tree log ---
+manifest
+ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-file-picker\src\main\AndroidManifest.xml:2:1-7:12
+INJECTED from F:\intelij_project\CombieCordovaAndRN\react-native-file-picker\src\main\AndroidManifest.xml:2:1-7:12
+INJECTED from F:\intelij_project\CombieCordovaAndRN\react-native-file-picker\src\main\AndroidManifest.xml:2:1-7:12
+INJECTED from F:\intelij_project\CombieCordovaAndRN\react-native-file-picker\src\main\AndroidManifest.xml:2:1-7:12
+INJECTED from F:\intelij_project\CombieCordovaAndRN\react-native-file-picker\src\main\AndroidManifest.xml:2:1-7:12
+INJECTED from F:\intelij_project\CombieCordovaAndRN\react-native-file-picker\src\main\AndroidManifest.xml:2:1-7:12
+INJECTED from F:\intelij_project\CombieCordovaAndRN\react-native-file-picker\src\main\AndroidManifest.xml:2:1-7:12
+	package
+		ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-file-picker\src\main\AndroidManifest.xml:3:5-29
+		INJECTED from F:\intelij_project\CombieCordovaAndRN\react-native-file-picker\src\main\AndroidManifest.xml
+		INJECTED from F:\intelij_project\CombieCordovaAndRN\react-native-file-picker\src\main\AndroidManifest.xml
+	android:versionName
+		INJECTED from F:\intelij_project\CombieCordovaAndRN\react-native-file-picker\src\main\AndroidManifest.xml
+		ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-file-picker\src\main\AndroidManifest.xml:2:1-7:12
+		INJECTED from F:\intelij_project\CombieCordovaAndRN\react-native-file-picker\src\main\AndroidManifest.xml
+	android:versionCode
+		INJECTED from F:\intelij_project\CombieCordovaAndRN\react-native-file-picker\src\main\AndroidManifest.xml
+		ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-file-picker\src\main\AndroidManifest.xml:2:1-7:12
+		INJECTED from F:\intelij_project\CombieCordovaAndRN\react-native-file-picker\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-file-picker\src\main\AndroidManifest.xml:2:11-69
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-file-picker\src\main\AndroidManifest.xml:5:5-80
+	android:name
+		ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-file-picker\src\main\AndroidManifest.xml:5:22-78
+uses-sdk
+INJECTED from F:\intelij_project\CombieCordovaAndRN\react-native-file-picker\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from F:\intelij_project\CombieCordovaAndRN\react-native-file-picker\src\main\AndroidManifest.xml
+INJECTED from F:\intelij_project\CombieCordovaAndRN\react-native-file-picker\src\main\AndroidManifest.xml
+INJECTED from F:\intelij_project\CombieCordovaAndRN\react-native-file-picker\src\main\AndroidManifest.xml
+INJECTED from F:\intelij_project\CombieCordovaAndRN\react-native-file-picker\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from F:\intelij_project\CombieCordovaAndRN\react-native-file-picker\src\main\AndroidManifest.xml
+		ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-file-picker\src\main\AndroidManifest.xml
+		INJECTED from F:\intelij_project\CombieCordovaAndRN\react-native-file-picker\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from F:\intelij_project\CombieCordovaAndRN\react-native-file-picker\src\main\AndroidManifest.xml
+		ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-file-picker\src\main\AndroidManifest.xml
+		INJECTED from F:\intelij_project\CombieCordovaAndRN\react-native-file-picker\src\main\AndroidManifest.xml

@@ -1,0 +1,129 @@
+
+.margin-top-20 {
+  margin-top: 20px!important;
+}
+
+.margin-top-40 {
+  margin-top: 40px!important;
+}
+
+.margin-top-25 {
+  margin-top: 25px!important;
+}
+h1,h2 {
+  color: #fff;
+  font-size: 22px;
+}
+h2 {
+  color: rgba(255,255,255,.3);
+}
+
+.input-box input {
+  font-size: 14px !important;
+}
+
+.button.disabled, .button[disabled] {
+  color: #fff;
+  background-color: rgba(104, 199, 95, 1);
+  border-color: rgba(104, 199, 95, 1);
+}
+
+.loginpanel-padding {
+  margin-top: 50%;
+  padding: 0 30px 10px 30px;
+}
+
+@media (max-width: 300px) {
+  .loginpanel-padding {
+    padding: 0 12px;
+  }
+}
+
+.bgImg{
+  background: url("../images/login-bg-new1.png");
+  background-repeat:no-repeat;
+  background-size:100% 100%;
+}
+
+article , .input-box , .group {
+  background-color: transparent;!important;
+}
+
+.basketline:before {
+  left: 0;
+  -webkit-transform-origin: left center;
+}
+.basketline:after {
+  right: 0;
+  -webkit-transform-origin: left center;
+}
+.basketline:before, .basketline:after {
+  width: 1px;
+  height: 5px;
+  bottom: 0;
+}
+.vline, .hline, hr:after, .topline:before, .underline:after, .leftline:before, .rightline:after, .basketline:before, .basketline:after {
+  content: '';
+  display: block;
+  position: absolute;
+  background-color: #d1d1d1;
+  z-index: 1;
+  overflow: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.border-none {
+  border: none!important;
+}
+
+input[type="checkbox"]:before, .checkbox:before {
+  content: "\e92d";
+}
+
+input[type="checkbox"]:checked:before,
+.checkbox.active:before {
+  content: "\e930";
+}
+
+.userInfo {
+  display: none;
+  margin-top:30px;margin-bottom: 20px
+}
+
+.userInfo .icon {
+  font-size: 60px;margin-left: -35px;
+}
+
+
+.menubar {
+  height: 40px!important;
+}
+
+.menubar .tab {
+  padding-top: 9px;
+}
+
+
+button:not(.noclick):active, input[type="button"]:not(.noclick):active, .button:not(.noclick):active {
+   /*color: #007aff;*/
+   color: #278EEE;
+   background-color: #e8e8e8;
+}
+
+.radius40{
+  border-radius: 40px;
+}
+
+.loginBtn{
+  height: 40px !important;
+  line-height: 40px !important;
+}
+
+.login-input{
+  border: 1px solid #dddddd !important;
+}
+.top-div-bg{
+  background-image: url("../images/top-bg.png");
+  background-repeat:no-repeat;
+  background-size:100% 100%;
+}

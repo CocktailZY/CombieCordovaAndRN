@@ -1,0 +1,152 @@
+<!-- HTML5文件 -->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <title>待办列表</title>
+  <meta http-equiv="expires" content="0">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <link rel="stylesheet" href="lib/agile/css/agile.layout.css">
+  <link rel="stylesheet" href="lib/third/seedsui/plugin/seedsui/seedsui.min.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link href="lib/pdf/css/jquery.touchPDF.css" rel="stylesheet" media="screen"/>
+  <style>
+    [name="attachment"] .row-left {
+      width: 40px!important;
+      padding: 0;
+      color: #4587f7;
+    }
+
+    .icon-attach-fill {
+      top: 3px;
+      color: #4587f7;
+      left: 6px;
+      font-size: 18px!important;
+    }
+  </style>
+</head>
+<body>
+<div id="section_container">
+  <section id="noticeList_section" data-role="section">
+    <header>
+      <div class="titlebar reverse">
+        <a class="titlebar-button" onclick="window.location.href = 'index.html';"><!-- href="javascript:back()"-->
+          <i class="icon icon-arrowleft"></i>首页
+          <!--<i class="icon icon-user"></i>
+          <span class="text-ellipsis" name="userFullNameText"></span>-->
+        </a>
+        <h1 class="titlebar-title text-center">公告列表</h1>
+        <a class="titlebar-button button white outline loginOutBtn" style="padding:0 8px;visibility: hidden;">
+           <i class="icon icon-gear size20"></i>
+        </a>
+      </div>
+    </header>
+    <article  data-role="article" id="refresh_article" data-scroll="pulldown" class="active has-header">
+      <div class="scroller">
+        <ul class="list self-list" id="content">
+
+        </ul>
+      </div>
+    </article>
+  </section>
+
+  <section id="noticeDetail-section" data-role="section">
+    <!--头部-->
+    <header>
+      <div class="titlebar reverse">
+        <a id="head_back" class="titlebar-button" href="javascript:backToNoticeList();">
+          <i class="icon icon-arrowleft"></i>返回
+          <!--<i class="icon icon-user"></i>-->
+          <!--<span id="userFullNameText"></span>-->
+        </a>
+        <h1 class="titlebar-title text-center">公告详情</h1>
+        <a class="titlebar-button button white outline loginOutBtn" style="padding:0 8px;visibility:hidden;"
+           onclick="Util.quitToLoginPage()">
+          <!-- <i class="icon icon-gear size20"></i>-->
+          <label>注销</label>
+        </a>
+      </div>
+    </header>
+    <article class="active has-header" id="noticeDetail-article" data-role="article" data-scroll="verticle" style="background: url('images/formBackground.png')" data-scroll-options="{click:false,tap:true}">
+      <div class="scroller">
+        <form class="noticeform">
+          <h2 id="title" title="" ></h2>
+          <div id="fuTitle" style=""></div>
+          <div class="row border-none">
+            <div id="noticeContent">
+            </div>
+          </div>
+          <div class="group border-none bg-transparent"  name="attachment" style="padding: 0">
+
+          </div>
+        </form>
+      </div>
+    </article>
+  </section>
+
+  <!--查看正文-->
+  <section id="notice-reader-section" data-role="section">
+    <header>
+      <div class="titlebar reverse">
+        <a class="titlebar-button" href="javascript:backToNoticeDetail()"><!-- href="javascript:back()"-->
+          <i class="icon icon-arrowleft"></i>返回
+          <!--<i class="icon icon-user"></i>
+          <span class="text-ellipsis" name="userFullNameText"></span>-->
+        </a>
+        <h1 class="titlebar-title text-center">查看正文</h1>
+        <!--<a class="titlebar-button button white outline" style="padding:0 8px;border-radius:40px;"-->
+        <!--onclick="Util.quitToLoginPage()">-->
+        <!--&lt;!&ndash; <i class="icon icon-gear size20"></i>&ndash;&gt;-->
+        <!--<label>注销</label>-->
+        <!--</a>-->
+        <a class="titlebar-button button white outline loginOutBtn" style="padding:0 8px;visibility:hidden;"
+           onclick="Util.quitToLoginPage()">
+          <!-- <i class="icon icon-gear size20"></i>-->
+          <label>注销</label>
+        </a>
+      </div>
+    </header>
+    <article class="active has-header">
+      <!--<button id="fangda">放大</button>-->
+      <div id="myPDF" style="display:none;"></div>
+      <div id="container" class="data_border" style="display:none;">
+        <img id="image" src="" style="width: 100%; height: 100%;  vertical-align:middle;">
+
+      </div>
+    </article>
+  </section>
+
+</div>
+<script type="text/html" id="progressDialog">
+  <div style="text-align:center;font-size:20px;color:#3498DB;font-weight:600;margin:5px 0;">文件下载</div>
+  <div class="progress-bar striped radius8 lrmargin8">
+    <span class="progress animated" id="progress_num" style="width: 0px;"></span>
+  </div>
+  <div class="rowspace"></div>
+  <span class="text-center full-width" id="percent_num"></span>
+  <div class="rowspace"></div>
+</script>
+
+<!--- third -->
+<script src="lib/third/jquery/jquery-2.1.3.min.js"></script>
+<script src="lib/third/iscroll/iscroll-probe.js"></script>
+<!---  agile -->
+<script type="text/javascript" src="lib/agile/js/agile.js"></script>
+<script src="cordova.js"></script>
+<!-- 显示pdf -->
+<script type="text/javascript" src="lib/pdf/js/pdf.compatibility.js"></script>
+<script type="text/javascript" src="lib/pdf/js/pdf.js"></script>
+<script type="text/javascript" src="lib/pdf/js/jquery.touchSwipe.js"></script>
+<script type="text/javascript" src="lib/pdf/js/jquery.touchPDF.js"></script>
+<script type="text/javascript" src="lib/pdf/js/jquery.panzoom.js"></script>
+<script type="text/javascript" src="lib/pdf/js/jquery.mousewheel.js"></script>
+<!-- app -->
+<script type="text/javascript" src="lib/app/js/app.seedsui.js"></script>
+<script type="text/javascript" src="lib/custom/properties.js"></script>
+<script type="text/javascript" src="lib/custom/ui.js"></script>
+<script type="text/javascript" src="lib/custom/util.js"></script>
+<script src="script/noticeList.js"></script>
+</body>
+</html>

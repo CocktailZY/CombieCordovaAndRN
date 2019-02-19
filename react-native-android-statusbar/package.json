@@ -1,0 +1,55 @@
+{
+  "_args": [
+    [
+      "react-native-android-statusbar@0.1.3",
+      "F:\\svn_project\\InstantMessage"
+    ]
+  ],
+  "_from": "react-native-android-statusbar@0.1.3",
+  "_id": "react-native-android-statusbar@0.1.3",
+  "_inBundle": false,
+  "_integrity": "sha1-QDhWuwf2pGbvWwqhxUS26lZAJqw=",
+  "_location": "/react-native-android-statusbar",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "react-native-android-statusbar@0.1.3",
+    "name": "react-native-android-statusbar",
+    "escapedName": "react-native-android-statusbar",
+    "rawSpec": "0.1.3",
+    "saveSpec": null,
+    "fetchSpec": "0.1.3"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "http://registry.npm.taobao.org/react-native-android-statusbar/download/react-native-android-statusbar-0.1.3.tgz",
+  "_spec": "0.1.3",
+  "_where": "F:\\svn_project\\InstantMessage",
+  "author": {
+    "name": "Nishanth Shankar",
+    "email": "NishanthShankr@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/NishanthShankar/react-native-android-statusbar/issues"
+  },
+  "description": "A react native android package to control the status bar.",
+  "homepage": "https://github.com/NishanthShankar/react-native-android-statusbar#readme",
+  "keywords": [
+    "react-component",
+    "react-native",
+    "android"
+  ],
+  "license": "MIT",
+  "main": "index.android.js",
+  "name": "react-native-android-statusbar",
+  "peerDependencies": {
+    "react-native": ">= 0.30.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/NishanthShankar/react-native-android-statusbar.git"
+  },
+  "version": "0.1.3"
+}

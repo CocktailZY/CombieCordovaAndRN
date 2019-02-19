@@ -1,0 +1,74 @@
+.comment-a{
+    color: #97AAD0;
+    font-size: 11px;
+}
+
+.font-size14{
+    font-size: 14px;
+}
+
+.font-small{
+    font-size: small !important;
+}
+
+.font-smaller{
+    font-size: smaller !important;
+}
+
+.font-xsmaller{
+    font-size: x-small !important;
+}
+
+.tbpadding12{
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+.tbpadding14{
+    padding-top: 14px;
+    padding-bottom: 14px;
+}
+
+.tbpadding4{
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.ml10{
+    margin-left: 10px;
+}
+
+.mb3{
+    margin-bottom: 3px;
+}
+.mt6{
+    margin-top: 6px;
+}
+
+.pt4b5{
+    padding-top: 4px;
+    padding-bottom: 5px;
+}
+
+.li-border-color{
+    border-color: #eeeeee !important;
+}
+.font-space{
+    letter-spacing: 1px;
+}
+
+.fong-space05{
+    letter-spacing: 0.5px;
+}
+
+.del-icon{
+    position: relative;
+    top: 11px;
+    right: -23px;
+    z-index: 1;
+}
+
+.add-icon{
+    text-align: center !important;
+    padding-top: 19px !important;
+}

@@ -1,0 +1,41 @@
+-- Merging decision tree log ---
+manifest
+ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-filesystem\src\main\AndroidManifest.xml:2:1-9:12
+INJECTED from F:\intelij_project\CombieCordovaAndRN\react-native-filesystem\src\main\AndroidManifest.xml:2:1-9:12
+INJECTED from F:\intelij_project\CombieCordovaAndRN\react-native-filesystem\src\main\AndroidManifest.xml:2:1-9:12
+INJECTED from F:\intelij_project\CombieCordovaAndRN\react-native-filesystem\src\main\AndroidManifest.xml:2:1-9:12
+INJECTED from F:\intelij_project\CombieCordovaAndRN\react-native-filesystem\src\main\AndroidManifest.xml:2:1-9:12
+	package
+		ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-filesystem\src\main\AndroidManifest.xml:3:11-46
+		INJECTED from F:\intelij_project\CombieCordovaAndRN\react-native-filesystem\src\main\AndroidManifest.xml
+		INJECTED from F:\intelij_project\CombieCordovaAndRN\react-native-filesystem\src\main\AndroidManifest.xml
+	android:versionCode
+		INJECTED from F:\intelij_project\CombieCordovaAndRN\react-native-filesystem\src\main\AndroidManifest.xml
+		ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-filesystem\src\main\AndroidManifest.xml:2:1-9:12
+		INJECTED from F:\intelij_project\CombieCordovaAndRN\react-native-filesystem\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-filesystem\src\main\AndroidManifest.xml:2:11-69
+application
+ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-filesystem\src\main\AndroidManifest.xml:5:5-79
+	android:fullBackupContent
+		ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-filesystem\src\main\AndroidManifest.xml:5:18-76
+uses-permission#android.permission.ACCESS_NOTIFICATION_POLICY
+ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-filesystem\src\main\AndroidManifest.xml:6:5-8:38
+	android:maxSdkVersion
+		ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-filesystem\src\main\AndroidManifest.xml:8:9-35
+	android:name
+		ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-filesystem\src\main\AndroidManifest.xml:7:9-69
+uses-sdk
+INJECTED from F:\intelij_project\CombieCordovaAndRN\react-native-filesystem\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from F:\intelij_project\CombieCordovaAndRN\react-native-filesystem\src\main\AndroidManifest.xml
+INJECTED from F:\intelij_project\CombieCordovaAndRN\react-native-filesystem\src\main\AndroidManifest.xml
+INJECTED from F:\intelij_project\CombieCordovaAndRN\react-native-filesystem\src\main\AndroidManifest.xml
+INJECTED from F:\intelij_project\CombieCordovaAndRN\react-native-filesystem\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from F:\intelij_project\CombieCordovaAndRN\react-native-filesystem\src\main\AndroidManifest.xml
+		ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-filesystem\src\main\AndroidManifest.xml
+		INJECTED from F:\intelij_project\CombieCordovaAndRN\react-native-filesystem\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from F:\intelij_project\CombieCordovaAndRN\react-native-filesystem\src\main\AndroidManifest.xml
+		ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-filesystem\src\main\AndroidManifest.xml
+		INJECTED from F:\intelij_project\CombieCordovaAndRN\react-native-filesystem\src\main\AndroidManifest.xml

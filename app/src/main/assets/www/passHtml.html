@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <title>登录</title>
+    <link rel="stylesheet" href="lib/agile/css/agile.layout.css">
+    <link rel="stylesheet" href="lib/third/seedsui/plugin/seedsui/seedsui.min.css">
+    <link rel="stylesheet" href="css/main.css"/>
+    <style type="text/css">
+        .tipBox:after {
+            position: absolute;
+            right: 100%;
+            top: 25%;
+            height: 0;
+            width: 0;
+            content: " ";
+            border-width: 5px;
+            margin-top: -5px;
+            border-style: solid;
+            border-color: transparent;
+            border-right-color: #b8daff;
+        }
+    </style>
+</head>
+
+<body>
+<div id="section_container">
+    <section id="pass_section" data-role="section">
+        <header>
+            <div class="titlebar reverse">
+                <a class="titlebar-button" style="visibility: hidden;"><!-- href="javascript:back()"-->
+                    <i class="icon icon-arrowleft"></i>首页
+                    <!--<i class="icon icon-user"></i>
+                    <span class="text-ellipsis" name="userFullNameText"></span>-->
+                </a>
+                <h1 class="titlebar-title text-center">绑定提示</h1>
+                <a class="titlebar-button button noclick bg-transparent" style="padding:0 8px" href="login.html?type=loginout">
+                    重新登录
+                </a>
+            </div>
+        </header>
+
+        <article class="active has-header det-backcolor">
+            <!--tipBox-->
+            <div class="bg-white tbpadding8 text-center" style="margin-top: 20%">
+                <h2 id="title" class="lrpadding8" style="margin: 20px 12px 30px 12px">设备绑定申请已发出，正等待审核...</h2>
+                <a class="radius4 button block margin12" id="btn" style="display: none;" onclick="toBind()">点我重新绑定</a>
+            </div>
+            <div class="padding8 margin12">
+                <p class="text-center" style="color: #aaaaaa;">您还可以联系管理员,您的设备编码是:</p>
+                <p class="text-center" style="color: #aaaaaa;" id="mac_address"></p>
+            </div>
+        </article>
+    </section>
+
+</div>
+
+<!--- third -->
+<script src="lib/third/jquery/jquery-2.1.3.min.js"></script>
+<script src="lib/third/jquery/jquery.mobile.custom.min.js"></script>
+<script src="lib/third/iscroll/iscroll-probe.js"></script>
+<!---  agile -->
+<script src="cordova.js"></script>
+<script type="text/javascript" src="lib/agile/js/agile.js"></script>
+
+<!-- app -->
+<script src="lib/md5.js"></script>
+<script type="text/javascript" src="lib/app/js/app.seedsui.js"></script>
+<script type="text/javascript" src="lib/custom/properties.js"></script>
+
+<script type="text/javascript" src="lib/custom/ui.js"></script>
+<script type="text/javascript" src="lib/custom/util.js"></script>
+
+<!--<script type="text/javascript" src="js/common.js"></script>-->
+<script type="text/javascript">
+	Util.deviceReady(function () {
+		$('#mac_address').text(Util.getItem('uuid'));
+
+		if (device.platform.toLowerCase() == 'ios') {
+			path = cordova.file.documentsDirectory + localFileName;
+		} else {
+			path = cordova.file.externalDataDirectory + localFileName;
+		}
+		checkFileExited(path, function (entry) {
+			//判断本地文件是否存在
+			window.resolveLocalFileSystemURL(path, function (fileEntry) {
+				fileEntry.remove(function () {
+//                    console.log('delete success');
+					deleteFunc();
+				}, function (err) {
+					console.error(err);
+				}, function () {
+					console.log('file not exist');
+				});
+			})
+		}, function () {
+			deleteFunc();
+		});
+	})
+
+	function deleteFunc() {
+		getDataByAjax({
+//                        url: 'http://192.168.81.36:8091/oa/mobileEquipment/deletestatus',
+			url: base + 'mobileEquipment/deletestatus',
+			data: {
+				ticket: Util.getItem('ticket'),
+				uuid: Util.getItem('uuid'),
+				userid: Util.getItem('userid')
+			}
+		}, function () {
+			showConsole('标记pc可删除')
+		}, {isShow: false})
+	}
+
+	var status = Util.queryString('status');
+	var loginType = Util.queryString('loginType');
+	if (status && status == '0') {
+		$('#title').text('设备绑定申请已发出，正等待审核...');
+		$('#btn').hide();
+		var timer = setInterval(function () {
+			getDataByAjax({
+//          url:'http://192.168.81.36:8091/oa/mobileEquipment/check',
+				url: base + 'mobileEquipment/check',
+				data: {
+					mobileMax: Util.getItem("macAddress"),
+					model: Util.getItem("model"),
+					uuid: Util.getItem("uuid"),
+					ticket: Util.getItem("ticket"),
+					userid: Util.getItem("userid"),
+					userName: Util.getItem("userFullName"),
+					platform: Util.getItem('platform'),
+					type: 'check'
+				}
+			}, function (data) {
+				showConsole(data);
+				Util.redirectLogin(data.result);
+				if (data.status == '0') {
+					//已提交申请
+					//正在审核
+				} else if (data.status == '1') {
+					showUserInfo();
+					clearInterval(timer);
+					//已绑定
+					if (APP_LOCK_STATUS && loginType == 'auto') {
+						//获取应用锁状态
+						getDataByAjax({
+							// url: 'http://192.168.81.36:8091/oa/applicationLock/getModel',
+							url: base + 'applicationLock/getModel',
+							data: {
+								uuid: Util.getItem('uuid'),
+								ticket: Util.getItem('ticket'),
+								userId: Util.getItem('userid')
+							},
+							async: true,
+						}, function (data) {
+							Util.redirectLogin(data.result);
+							var isLock = data.isOpenLock;
+							var appLockPwd = data.applicationLock;
+							var fingerLock = data.isOpenFingerprintLock;
+							Util.setItem('isLock', isLock);
+							Util.setItem('appLockPwd', appLockPwd);
+							Util.setItem('fingerLock', fingerLock);
+
+							if (appLockPwd && isLock == '1') {
+								Util.setItem('handspwd', appLockPwd);
+								window.location.href = 'appLock.html?stepType=toIndex';
+							} else if (fingerLock == '1') {
+								window.location.href = 'finger.html?stepType=toIndex';
+							} else {
+								window.location.href = "index.html";
+							}
+						}, {isShow: false})
+					} else {
+						window.location.href = "index.html";
+					}
+				} else if (data.status == '4') {
+					//申请未通过
+//              A.showToast('设备绑定申请未通过！');
+					$('#title').text('设备绑定申请未通过！');
+					clearInterval(timer);
+					$('#btn').show();
+				} else if (data.status == '8') {
+					$('#title').text('设备已解绑，请重新绑定');
+					clearInterval(timer);
+					$('#btn').show();
+				} else if (data.status == '3') {
+					//已被其他用户绑定
+					A.showToast('该设备已被其他用户绑定！');
+					$('#title').text('该设备已被其他用户绑定！');
+					clearInterval(timer);
+				}
+			}, {isShow: false})
+		}, 3000);
+	} else if (status && status == '8') {
+		$('#title').text('设备已解绑，请重新绑定');
+		$('#btn').show();
+	} else {
+		$('#title').text('设备绑定申请未通过！');
+		$('#btn').show();
+	}
+
+	//  function updateStatus(){
+	//      getDataByAjax({
+	//          url: 'http://192.168.81.36:8091/oa/MobileLogin/updateLoginStatus',
+	//          data:{
+	//              ticket:Util.getItem('ticket'),
+	//              uuid:Util.getItem('uuid'),
+	//              userid:Util.getItem('userid')
+	//          },
+	//          async: true,
+	//      },function(data){
+	//          //状态修改成功
+	//          if(data.status != '1'){
+	//              return
+	//          }else{
+	//              var params = { 'sequence': 1, 'alias': Util.getItem("userid") };
+	//              window.plugins.jPushPlugin.setAlias(
+	//                  params,
+	//                  function(){showConsole('success');},
+	//                  function(data){
+	//                      showConsole(data);
+	//                  }
+	//              );
+	//              //已绑定
+	//              window.location.href = "index.html";
+	//          }
+	//      },{isShow:false})
+	//  }
+
+	function toBind() {
+		// window.plugins.jPushPlugin.getRegistrationID(function (rId) {
+		//     Util.setItem('registrationId', rId);
+		getDataByAjax({
+//          url:'http://192.168.81.36:8091/oa/mobileEquipment/boundmobileEquipment',
+			url: base + 'mobileEquipment/boundmobileEquipment',
+			data: {
+				mobileMax: Util.getItem("macAddress"),
+				model: Util.getItem("model"),
+				uuid: Util.getItem("uuid"),
+				ticket: Util.getItem('ticket'),
+				userid: Util.getItem('userid'),
+				userName: Util.getItem('userFullName'),
+				platform: Util.getItem('platform'),
+				deptid: Util.getItem('deptid'),
+				type: 'check',
+				alias: Util.getItem('sequence'),
+				registrationId: '1'
+			}
+		}, function (data) {
+			Util.redirectLogin(data.result);
+			if (data != null && data.id != null && data.id != '') {
+				window.location.href = "passHtml.html?status=0";
+			} else {
+				A.showToast('提交申请失败!');
+			}
+		}, {isShow: true});
+		// });
+	}
+
+	//获取用户信息
+	function showUserInfo() {
+		getDataByAjax({
+			url: base + 'MobileFlow/getUserInfo',
+			//url:'http://192.168.81.36:8086/oa/MobileFlow/getUserInfo',
+			data: {
+				id: Util.getItem('userid'),
+				ticket: Util.getItem('ticket'),
+				uuid: Util.getItem('uuid')
+			},
+			async: true
+		}, function (data) {
+			var userInfo = data.userInfo.userInfo[0];
+			Util.setItem("headImg", userInfo["imagepath"].split('=')[1]);
+			Util.setItem("email", userInfo["email"]);
+			Util.setItem("phone", userInfo["phone"]);
+			//  showConsole("查询用户信息：" + userInfo["email"]);
+
+		});
+	}
+
+</script>
+</body>
+
+</html>
+

@@ -1,0 +1,18 @@
+#updateAppLock{
+    display: none;
+}
+#fingerPwd .float-right{
+    display: none;
+}
+#handsPwd .float-right{
+    display: none;
+}
+#closeAppLock .float-right{
+    display: block;
+}
+#handsPwd{
+    border:none !important;
+}
+#closeAppLock{
+    display: none;
+}

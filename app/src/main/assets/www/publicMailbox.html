@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <title>Agile Lite</title>
+    <link rel="stylesheet" href="lib/agile/css/agile.layout.css">
+    <link rel="stylesheet" href="lib/third/seedsui/plugin/seedsui/seedsui.min.css">
+    <link rel="stylesheet" href="lib/third/weditor/wangEditor.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/publicMailbox.css">
+
+    <!--<link rel="stylesheet" href="lib/third/flat/flat.component.css">-->
+    <link rel="stylesheet" href="lib/third/exlist/exlist.css">
+    <style type="text/css">
+        .delete_mark_div {
+            float: left;
+            width: 50%;
+            height: 100%;
+            background-color: #FF2D2D;
+            text-align: center;
+            padding: 12px;
+            color: #FFFFFF;
+        }
+    </style>
+
+</head>
+<body>
+<div id="section_container">
+    <!--公共邮箱-->
+    <section id="toPublicMailbox_section" data-role="section">
+        <header>
+            <div class="titlebar reverse">
+                <a class="titlebar-button" onclick="window.location.href='file:///android_asset/www/index.html?checkType=no';">
+                    <i class="icon icon-arrowleft"></i>首页
+                </a>
+                <h1 class="titlebar-title text-center">公共邮箱</h1>
+                <a class="titlebar-button button noclick bg-transparent" style="padding:0 8px;"
+                   onclick="toWriteLetter()">
+                    <i class="icon icon-write size24"></i>
+                </a>
+            </div>
+
+
+        </header>
+        <article class="active has-header det-backcolor" id="mail_article" data-role="article">
+
+
+            <ul class="list noclick" style="padding-bottom: 0px; border-bottom-width: 0px;">
+                <li onclick="toInbox('inbox');">
+                    <div class="justify">
+                        <div class="photo size32 radius4" style="background-color: #5bc0de;">
+                            <i class="icon icon-mail-fill"></i>
+                        </div>
+                    </div>
+                    <div class="justify-content nowrap box box box-middle">
+                        收件箱
+                        <span class="tip ml8" style="width: 20px;height: 20px;line-height: 20px;display: none;" id="inboxcount">
+
+                        </span>
+                    </div>
+                    <div class="justify" style="line-height: 32px;">
+                        <i class="icon icon-arrowright"></i>
+                    </div>
+                </li>
+                <li onclick="toDraft('draft');">
+                    <div class="justify">
+                        <div class="photo size32 radius4" style="background-color: #f4984e;">
+                            <i class="icon icon-file-fill"></i>
+                        </div>
+                    </div>
+                    <div class="justify-content nowrap box box box-middle">
+                        草稿箱
+                        <span class="tip ml8" style="width: 15px;height: 15px;line-height: 16px;display: none;" id="draftboxcount">
+
+                        </span>
+                    </div>
+                    <div class="justify" style="line-height: 32px;">
+                        <i class="icon icon-arrowright"></i>
+                    </div>
+                </li>
+                <li onclick="toSendBox('sent');">
+                    <div class="justify">
+                        <div class="photo size32 radius4" style="background-color: #88d038;">
+                            <i class="icon icon-paperplane-fill"></i>
+                        </div>
+                    </div>
+                    <div class="justify-content nowrap box box box-middle">
+                        已发送
+                        <span class="tip ml8" style="width: 15px;height: 15px;line-height: 16px;display: none;" id="sentboxcount">
+
+                        </span>
+                    </div>
+                    <div class="justify" style="line-height: 32px;">
+                        <i class="icon icon-arrowright"></i>
+                    </div>
+                </li>
+                <li onclick="toTrashBox('trash');">
+                    <div class="justify">
+                        <div class="photo size32 radius4" style="background-color: #97AAD0;">
+                            <i class="icon icon-trash-fill"></i>
+                        </div>
+                    </div>
+                    <div class="justify-content nowrap box box box-middle">
+                        垃圾邮件
+                        <!--<span class="tip ml8" style="width: 15px;height: 15px;line-height: 15px;" id="trashboxcount">-->
+                        <!---->
+                        <!--</span>-->
+                    </div>
+                    <div class="justify" style="line-height: 32px;">
+                        <i class="icon icon-arrowright"></i>
+                    </div>
+                </li>
+                <!--清空邮箱 hidden-->
+                <li onclick="clearBox();" style="visibility: hidden;">
+                    <div class="justify">
+                        <div class="photo size32 radius4" style="background-color: #97AAD0;">
+                            <i class="icon icon-trash-fill"></i>
+                        </div>
+                    </div>
+                    <div class="justify-content nowrap box box box-middle">
+                        清空所有邮件
+                    </div>
+                </li>
+
+            </ul>
+        </article>
+    </section>
+    <!--收件箱-->
+    <section id="inbox_section" data-role="section">
+        <header>
+            <div class="titlebar reverse">
+                <!--<a class="titlebar-button button white outline loginOutBtn" style="padding:0 8px;visibility:hidden;"-->
+                <!--onclick="Util.quitToLoginPage()">-->
+                <!--&lt;!&ndash; <i class="icon icon-gear size20"></i>&ndash;&gt;-->
+                <!--<label>注销</label>-->
+                <!--</a>-->
+                <a class="titlebar-button" id="btn_cancel" onclick="toPublicMailbox()">
+                    <i class="icon icon-arrowleft"></i>返回
+                </a>
+                <h1 class="titlebar-title text-center">收件箱</h1>
+                <a class="titlebar-button button noclick bg-transparent" style="padding:0 8px;display: block;"
+                   id="btn_popover"><!--onclick="toWriteLetter()"-->
+                    <i class="icon icon-moreh-fill size24"></i>
+                </a>
+                <a class="titlebar-button button noclick bg-transparent" style="padding:0 8px;display: none;"
+                   id="btn_chooseAll"><!--onclick="toWriteLetter()"-->
+                    <i class="icon icon-cbo size24"></i>
+                </a>
+                <a class="titlebar-button button noclick bg-transparent" style="padding:0 8px; display: none;"
+                   id="btn_delete"><!--onclick="toWriteLetter()"-->
+                    <i class="icon icon-trash size24"></i>
+                </a>
+            </div>
+        </header>
+        <article class="active has-header det-backcolor" id="inbox_article" data-role="article">
+            <!--<form id="myform">-->
+            <div id="sj_outBox" class="bg-white full" data-scroll="pulldown" data-scroll-options="{click:false,tap:true}">
+                <!--样例ul-->
+                <div class="scroller">
+                    <!--<div id="sj_box" class="full-width bg-white">-->
+                        <ul class="list between border-content listitem noclick">
+                            <!--<li>
+                                <div class="justify">
+                                    <div class="dept-photo bg-6">
+                                        小
+                                    </div>
+                                </div>
+                                <div class="justify-content dept-parent-line dept-parent-left">
+                                    <p>
+                                        <img src="images/point.png" width="10" height="10">
+                                        小助手
+                                        <i class="icon icon-attach"></i>
+                                    </p>
+                                    <small class="top right">昨天 11:50</small>
+                                    <small class="nowrap">会话已完成，请您在会话记录中填写报告</small>
+                                </div>
+                                <div class="justify dept-parent-line dept-parent-right" style="color: #8f8f8f;">
+                                    <i class="icon icon-arrowright"></i>
+                                </div>
+                            </li>-->
+
+                        </ul>
+                    <!--</div>-->
+                </div>
+            </div>
+            <!--</form>-->
+        </article>
+    </section>
+    <!--发件箱-->
+    <section id="hasSend_section" data-role="section">
+        <header>
+            <div class="titlebar reverse" id="sendBox">
+                <a class="titlebar-button" onclick="toPublicMailbox()">
+                    <i class="icon icon-arrowleft"></i>返回
+                </a>
+                <h1 class="titlebar-title text-center">发件箱</h1>
+                <a class="titlebar-button button noclick bg-transparent" style="padding:0 8px;"
+                   onclick="toWriteLetter()">
+                    <i class="icon icon-write size24"></i>
+                </a>
+            </div>
+            <!-- <div id="searchSendBox" style="display: none">
+                 <div class="titlebar">
+                     <h1 class="text-center">搜索邮件</h1>
+                     <div class="right">
+                         <a class="button radius16 outline" onclick="colseSearchEmail(this)">
+                             关闭
+                         </a>
+                     </div>
+                 </div>
+                 <div class="input-box ">
+                     <input type="text" placeholder="搜索邮件" >
+                     <i class="color-placeholder icon icon-search"></i>
+                 </div>
+             </div>-->
+        </header>
+        <article class="active has-header det-backcolor" id="sendbox_article" data-role="article">
+            <div id="fs_outBox" class="bg-white full" data-scroll="pulldown">
+                <!--样例ul-->
+                <div class="scroller">
+                    <ul class="list between border-content">
+
+                    </ul>
+                </div>
+            </div>
+
+        </article>
+
+    </section>
+    <!--垃圾箱-->
+    <section id="trashBox_section" data-role="section">
+        <header>
+            <div class="titlebar reverse">
+                <!--<a class="titlebar-button button white outline loginOutBtn" style="padding:0 8px;visibility:hidden;"-->
+                <!--onclick="Util.quitToLoginPage()">-->
+                <!--&lt;!&ndash; <i class="icon icon-gear size20"></i>&ndash;&gt;-->
+                <!--<label>注销</label>-->
+                <!--</a>-->
+                <a class="titlebar-button" onclick="toPublicMailbox()">
+                    <i class="icon icon-arrowleft"></i>返回
+                </a>
+                <h1 class="titlebar-title text-center">垃圾箱</h1>
+                <a class="titlebar-button button noclick bg-transparent" style="padding:0 8px;"
+                   onclick="toWriteLetter()">
+                    <i class="icon icon-write size24"></i>
+                </a>
+                <!-- <a class="titlebar-button" onclick="back()">
+                     <i class="icon icon-arrowleft"></i>返回
+                 </a>
+                 <h1 class="titlebar-title text-center">垃圾箱</h1>
+                 <a class="titlebar-button button white outline loginOutBtn" style="padding:0 8px 29px;" onclick="Util.quitToLoginPage()">
+                     &lt;!&ndash; <i class="icon icon-gear size20"></i>&ndash;&gt;
+                     <label>注销</label>
+                 </a>-->
+            </div>
+            <!--
+                            <div class="titlebar" id="trashBox">
+                                <div class="left">
+                                    <a>
+                                        <button class="outline height32 radiusround" onclick="toPublicMailbox()">文件夹</button>
+                                    </a>
+                                    <a>
+                                        <button class="outline height32 radiusround" onclick="toWriteLetter()">写信</button>
+                                    </a>
+                                </div>
+                                <h1 class="text-center">垃圾箱</h1>
+                                <div class="right">
+                                    <a class="button round outline">
+                                        <i class="icon icon-arrowrefresh2"></i>
+                                    </a>
+                                    <a class="button round outline" onclick="serachEmail(this)">
+                                        <i class="icon icon-search"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div id="searchTrashBox" style="display: none">
+                                <div class="titlebar">
+                                    <h1 class="text-center">搜索邮件</h1>
+                                    <div class="right">
+                                        <a class="button radius16 outline" onclick="colseSearchEmail(this)">
+                                            关闭
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="input-box ">
+                                    <input type="text" placeholder="搜索邮件" >
+                                    <i class="color-placeholder icon icon-search"></i>
+                                </div>
+                            </div>-->
+        </header>
+        <article class="active has-header det-backcolor" id="trash_box_article" data-role="article">
+            <div id="lj_outBox" class="bg-white full" data-scroll="pulldown">
+                <!--样例ul-->
+                <div class="scroller">
+                    <ul class="list between border-content">
+
+                    </ul>
+                </div>
+            </div>
+
+
+        </article>
+
+    </section>
+    <!--草稿箱-->
+    <section id="draftBox_section" data-role="section">
+        <header>
+            <div class="titlebar reverse">
+                <!--<a class="titlebar-button button white outline loginOutBtn" style="padding:0 8px;visibility:hidden;"-->
+                <!--onclick="Util.quitToLoginPage()">-->
+                <!--&lt;!&ndash; <i class="icon icon-gear size20"></i>&ndash;&gt;-->
+                <!--<label>注销</label>-->
+                <!--</a>-->
+                <a class="titlebar-button" onclick="toPublicMailbox()">
+                    <i class="icon icon-arrowleft"></i>返回
+                </a>
+                <h1 class="titlebar-title text-center">草稿箱</h1>
+                <a class="titlebar-button button noclick bg-transparent" style="padding:0 8px;"
+                   onclick="toWriteLetter()">
+                    <i class="icon icon-write size24"></i>
+                </a>
+            </div>
+
+            <!--<div class="titlebar" id="draftBox">
+                <div class="left">
+                    <a>
+                        <button class="outline height32 radiusround" onclick="toPublicMailbox()">文件夹</button>
+                    </a>
+                    <a>
+                        <button class="outline height32 radiusround" onclick="toWriteLetter()">写信</button>
+                    </a>
+                </div>
+                <h1 class="text-center">草稿箱</h1>
+                <div class="right">
+                    <a class="button round outline">
+                        <i class="icon icon-arrowrefresh2"></i>
+                    </a>
+                    <a class="button round outline" onclick="serachEmail(this)">
+                        <i class="icon icon-search"></i>
+                    </a>
+                </div>
+            </div>
+            <div id="searchDraftBox" style="display: none">
+                <div class="titlebar">
+                    <h1 class="text-center">搜索邮件</h1>
+                    <div class="right">
+                        <a class="button radius16 outline" onclick="colseSearchEmail(this)">
+                            关闭
+                        </a>
+                    </div>
+                </div>
+                <div class="input-box ">
+                    <input type="text" placeholder="搜索邮件" >
+                    <i class="color-placeholder icon icon-search"></i>
+                </div>
+            </div>-->
+        </header>
+        <article class="active has-header det-backcolor" id="draft_box_article" data-role="article">
+            <div id="cg_outBox" class="bg-white full" data-scroll="pulldown">
+                <!--样例ul-->
+                <div class="scroller">
+                    <ul class="list between border-content">
+
+                    </ul>
+                </div>
+            </div>
+
+
+        </article>
+
+    </section>
+    <!--写信-->
+    <!--写信-->
+    <section id="toWriteLetter_section" data-role="section">
+        <header>
+            <div class="titlebar reverse">
+                <a class="titlebar-button" onclick="getback()">
+                    <i class="icon icon-arrowleft"></i>返回
+                </a>
+                <h1 class="titlebar-title text-center">写信</h1>
+                <a class="titlebar-button button noclick bg-transparent" style="padding:0 8px" id="writeToSave">
+                保存
+                </a>
+                <a class="titlebar-button button noclick bg-transparent" style="padding:0 8px" onclick="sendMail();">
+                    发送
+                </a>
+            </div>
+            <!--<div class="titlebar">-->
+            <!--<div class="left">-->
+            <!--<a class="button radius8 outline height30" href=""><i class="icon icon-paperplane-fill"></i>发送</a>-->
+            <!--&lt;!&ndash;<a class="button radius16 outline" href="">预览</a>&ndash;&gt;-->
+            <!--<a class="button radius8 outline height30" href="">存草稿</a>-->
+            <!--&lt;!&ndash;<a class="button radius16 outline" href="">取消</a>&ndash;&gt;-->
+            <!--</div>-->
+            <!--<div class="right">-->
+            <!--&lt;!&ndash;<a href="">抄送</a>&ndash;&gt;-->
+            <!--&lt;!&ndash;<a href="">密送</a>&ndash;&gt;-->
+            <!--&lt;!&ndash;<a href="">群发显示</a>&ndash;&gt;-->
+            <!--&lt;!&ndash;<a class="button round outline" href=""><i class="icon icon-tqq"></i></a>&ndash;&gt;-->
+            <!--&lt;!&ndash;<a class="button round outline" href=""><i class="icon icon-gear-fill"></i></a>&ndash;&gt;-->
+            <!--<a class="button round outline" onclick="toContactPersonBox()"><i class="icon icon-person-fill size16"></i></a>-->
+            <!--</div>-->
+            <!--</div>-->
+        </header>
+        <article class="active has-header" id="letter_article" data-role="article">
+            <form>
+                <div class="row padding8">
+                    <label >收件人:</label>
+                    <div class="row-right" style="border: 0;">
+                        <div id="receivePeople" class="padding8" onclick="getValue();">
+                            <!-- <span class="addHighLight lrpadding8 margin8" id="test1">市政府办公厅一秘处 &lt;yimi@egt360.com&gt;</span>
+                             <span class="addHighLight lrpadding8 margin8" id="test2">市政府办公厅一秘处 &lt;yimi@egt360.com&gt;</span>
+                             <span class="addHighLight lrpadding8 margin8" id="test3">市政府办公厅一秘处 &lt;yimi@egt360.com&gt;</span>
+              -->           </div>
+                        <div id="writePlace" contenteditable="true">
+
+
+                        </div>
+                    </div>
+                    <a class="button round outline" onclick="toContactPersonBox()" style="width: 28px;height: 28px;">
+                        <i class="icon icon-person-fill size16 nomargin"></i>
+                    </a>
+                </div>
+                <div class="row padding8">
+                    <label >发件人:</label>
+                    <div class="row-right input-box" data-input="clear" style="border: 0;">
+                        <input type="text" id="fromPeople" name="userTel" data-rule-field="手机号" data-rule="userTel" disabled>
+                    </div>
+                </div>
+                <div class="row padding8">
+                    <label >主题:</label>
+                    <div class="row-right input-box" data-input="clear" style="border: 0;">
+                        <input type="text"  name="topic" data-rule-field="主题" data-rule="topic" id="subject">
+                    </div>
+                </div>
+                <!--<div class="row">-->
+                <!--<label> <i class="icon icon-attachv-fill" style="font-size: 17px"></i>添加附件(最大3G)升至15G <input type="file" style="display: none"></label>&nbsp;|&nbsp;-->
+                <!--<label><i class="icon icon-arrowdown-fill" style="font-size: 17px;"></i>从手机上传图片<input type="file" style="display: none"></label>-->
+                <!--</div>-->
+                <div class="padding4">
+                    <div data-input="clear" class="row-right input-box noborder">
+                        <textarea class="label-right noborder" name="personal" rows="10" id="content" style="height: 100%;"></textarea>
+                    </div>
+                </div>
+            </form>
+        </article>
+    </section>
+    <!--回复邮件页面-->
+    <section id="backLetter_section" data-role="section">
+        <header>
+            <div class="titlebar reverse">
+                <a class="titlebar-button" onclick="backMailDetail();">
+                    <i class="icon icon-arrowleft"></i>返回
+                </a>
+                <h1 class="titlebar-title text-center">回复</h1>
+                <!--<a class="titlebar-button button noclick bg-transparent" style="padding:0 0px" onclick="backSaveDraft();">
+                    保存
+                </a>-->
+                <a class="titlebar-button button noclick bg-transparent" style="padding:0 0px" onclick="backMail();">
+                    发送
+                </a>
+            </div>
+        </header>
+        <article class="active has-header" id="backLetter_article" data-role="article">
+            <form>
+                <div class="row padding8">
+                    <label >收件人:</label>
+                    <div class="row-right" data-input="clear" style="border: 0;">
+                        <div id="backreceivePeople1" class="padding8" onclick="getBackValue();">
+                            <!-- <span class="addHighLight lrpadding8 margin8" id="test1">市政府办公厅一秘处 &lt;yimi@egt360.com&gt;</span>
+                             <span class="addHighLight lrpadding8 margin8" id="test2">市政府办公厅一秘处 &lt;yimi@egt360.com&gt;</span>
+                             <span class="addHighLight lrpadding8 margin8" id="test3">市政府办公厅一秘处 &lt;yimi@egt360.com&gt;</span>
+              -->       </div>
+                        <div id="writePlace1" contenteditable="true">
+
+                        </div>
+                        <!-- <input type="text" id="backreceivePeople1" name="userTel" data-rule-field="手机号" data-rule="userTel">-->
+
+                    </div>
+                    <a class="button round outline" onclick="toContactPersonBox()" style="width: 28px;height: 28px;">
+                        <i class="icon icon-person-fill size16 nomargin"></i>
+                    </a>
+                </div>
+                <div class="row padding8">
+                    <label >发件人:</label>
+                    <div class="row-right input-box" data-input="clear" style="border: 0;">
+                        <input type="text" id="backfromPeople1" name="userTel" data-rule-field="手机号" data-rule="userTel" disabled>
+                    </div>
+                </div>
+                <div class="row padding8">
+                    <label >主题:</label>
+                    <div class="row-right input-box" data-input="clear" style="border: 0;">
+                        <input type="text"  name="topic" data-rule-field="主题" data-rule="topic" id="backsubject1">
+                    </div>
+                </div>
+
+                <div class="bg-white">
+                    <div class="padding8">
+                        <div class="label-right noborder" name="personal" id="backcontent1" contenteditable="true" style="min-height: 150px;"></div>
+                        <!--
+           将详情页的数据带到回复页
+           -->
+                        <div>
+                            <hr style="margin-bottom: 12px;">
+                            <div class="justify-content det-backcolor padding8">
+                                <div style="font-size: medium" id="backread_subject" class="padding8"></div>
+                                <div class="font12 padding8 clearfix full-width">
+                                    <div class="font12 float-left width15">发件人:</div>
+                                    <div class="font12 float-right" style="width: 85%;">
+                                        <span class="addHighLight lrpadding8" id="backread_mailfrom"></span>
+                                    </div>
+
+                                </div>
+                                <div class="font12 pb8 lrpadding8 full-width clearfix">
+                                    <div class="font12 float-left width15">时&nbsp;&nbsp;&nbsp;&nbsp;间:</div>
+                                    <div class="float-right" id="backread_time" style="width: 85%;"></div>
+                                </div>
+                                <div class="clearfix full-width lrpadding8">
+                                    <div class="font12 float-left width15">收件人:</div>
+                                    <div id="backread_to" class="font12 float-right" style="width: 85%;">
+                                        <!--<span class="addHighLight lrpadding8">shoufashi@egt360.com</span>-->
+                                        <!--<span class="addHighLight lrpadding8">592656693@qq.com</span>-->
+                                        <!--<span class="addHighLight lrpadding8">592656693@qq.com</span>-->
+                                        <!--<span class="addHighLight lrpadding8">592656693@qq.com</span>-->
+                                    </div>
+                                </div>
+                                <div class="clearfix full-width lrpadding8">
+                                    <div class="font12 float-left width15">附&nbsp;&nbsp;&nbsp;&nbsp;件:</div>
+                                    <div id="backattch" class="font12 float-right" style="width: 85%;">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="backread_content" class="pt8">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </article>
+    </section>
+    <!--联系人-->
+    <section id="ContactPerson_section" data-role="section" >
+        <header>
+            <div class="titlebar reverse">
+                <!--<a class="titlebar-button button white outline loginOutBtn" style="padding:0 8px;visibility:hidden;"-->
+                <!--onclick="Util.quitToLoginPage()">-->
+                <!--&lt;!&ndash; <i class="icon icon-gear size20"></i>&ndash;&gt;-->
+                <!--<label>注销</label>-->
+                <!--</a>-->
+                <a class="titlebar-button" onclick="back()">
+                    <i class="icon icon-arrowleft"></i>返回
+                </a>
+                <!--<a data-toggle="back" onclick="toPublicMailbox()">
+                    <i class="icon icon-arrowleft"></i>
+                    <span>工作</span>
+                </a>-->
+                <h1 class="titlebar-title text-center">联系人</h1>
+                <a class="titlebar-button button noclick bg-transparent" style="padding:0 8px 29px;" onclick="addContactPerson()">
+                    <!-- <i class="icon icon-gear size20"></i>-->
+                    <label>确定</label>
+                </a>
+            </div>
+        </header>
+        <article class="active has-header det-backcolor text-center" id="ContactPerson_article" data-role="article">
+            <div class="table-box" style="padding: 0">
+                <div>
+                    <table id="ContactPerson_table">
+                        <!--<thead>
+                        <tr>
+                            <th class="text-center"><i class="icon icon-add" ></i></th>
+                        &lt;!&ndash;    <th class="text-center">姓名</th>
+                            <th class="text-center">性别</th>&ndash;&gt;
+                            <th class="text-center">邮箱</th>
+                        </tr>
+                        </thead>-->
+                        <tbody>
+                        <!--样例tr-->
+                        <!-- <tr>
+                             <td class="text-center"><input type="checkbox"></td>
+                             <td class="text-center" class="text-center">葛文</td>
+                             <td class="text-center" class="text-center">女</td>
+                             <td class="text-center" class="text-center">gewen@nj.fiberhome.com.cn</td>
+                         </tr>
+                         <tr>
+                             <td class="text-center"><input type="checkbox"></td>
+                             <td class="text-center">葛文</td>
+                             <td class="text-center">女</td>
+                             <td class="text-center">gewen@nj.fiberhome.com.cn</td>
+                         </tr>
+                         <tr>
+                             <td class="text-center"><input type="checkbox"></td>
+                             <td class="text-center">葛文</td>
+                             <td class="text-center">女</td>
+                             <td class="text-center">gewen@nj.fiberhome.com.cn</td>
+                         </tr>
+                         <tr>
+                             <td class="text-center"><input type="checkbox"></td>
+                             <td class="text-center">葛文</td>
+                             <td class="text-center">女</td>
+                             <td class="text-center">gewen@nj.fiberhome.com.cn</td>
+                         </tr>
+                         <tr>
+                             <td class="text-center"><input type="checkbox"></td>
+                             <td class="text-center">葛文</td>
+                             <td class="text-center">女</td>
+                             <td class="text-center">gewen@nj.fiberhome.com.cn</td>
+                         </tr>-->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </article>
+    </section>
+    <!--邮件详情页-->
+    <!--邮件详情-->
+    <section id="mailDetail_section" data-role="section">
+        <header>
+            <div class="titlebar reverse">
+                <a class="titlebar-button" onclick="getback();">
+                    <i class="icon icon-arrowleft"></i>返回
+                </a>
+                <h1 class="titlebar-title text-center">详情</h1>
+                <a class="titlebar-button button noclick bg-transparent" onclick="callback();" style="padding:0 8px;"
+                   id="callbackid"><!--visibility: hidden;-->
+                    <i class="icon icon-arrowreply size24"></i>
+                    <!--占位勿删-->
+                </a>
+            </div>
+        </header>
+        <article class="active has-header bg-white" id="mailDetail-article" data-role="article">
+            <div class="justify-content bg-white padding8" style="border-bottom: 1px solid #dddddd;">
+                <div style="font-size: medium" id="read_subject" class="padding8"></div>
+                <div class="font12 padding8 clearfix full-width">
+                    <div class="font12 float-left width15">发件人:</div>
+                    <div class="font12 float-right" style="width: 85%;">
+                        <span class="addHighLight lrpadding8" id="read_mailfrom"></span>
+                    </div>
+
+                </div>
+                <div class="font12 pb8 lrpadding8 full-width clearfix">
+                    <div class="font12 float-left width15">时&nbsp;&nbsp;&nbsp;&nbsp;间:</div>
+                    <div class="float-right" id="read_time" style="width: 85%;"></div>
+                </div>
+                <div class="clearfix full-width lrpadding8">
+                    <div class="font12 float-left width15">收件人:</div>
+                    <div id="read_to" class="font12 float-right" style="width: 85%;">
+                        <!--<span class="addHighLight lrpadding8">shoufashi@egt360.com</span>-->
+                        <!--<span class="addHighLight lrpadding8">592656693@qq.com</span>-->
+                        <!--<span class="addHighLight lrpadding8">592656693@qq.com</span>-->
+                        <!--<span class="addHighLight lrpadding8">592656693@qq.com</span>-->
+                    </div>
+                </div>
+                <div class="clearfix full-width lrpadding8">
+                    <div class="font12 float-left width15">附&nbsp;&nbsp;&nbsp;&nbsp;件:</div>
+                    <div id="attch" class="font12 float-right" style="width: 85%;">
+
+                    </div>
+                </div>
+            </div>
+            <div class="padding12 bg-white" id="read_content">
+
+            </div>
+        </article>
+    </section>
+    <!--查看正文-->
+    <section id="mail-reader-section" data-role="section">
+        <header>
+            <div class="titlebar reverse">
+                <a class="titlebar-button" href="javascript:backMailDetail()"><!-- href="javascript:back()"-->
+                    <i class="icon icon-arrowleft"></i>返回
+                    <!--<i class="icon icon-user"></i>
+                    <span class="text-ellipsis" name="userFullNameText"></span>-->
+                </a>
+                <h1 class="titlebar-title text-center">查看正文</h1>
+                <!--<a class="titlebar-button button white outline" style="padding:0 8px;border-radius:40px;"-->
+                <!--onclick="Util.quitToLoginPage()">-->
+                <!--&lt;!&ndash; <i class="icon icon-gear size20"></i>&ndash;&gt;-->
+                <!--<label>注销</label>-->
+                <!--</a>-->
+                <a class="titlebar-button button white outline loginOutBtn" style="padding:0 8px;visibility:hidden;"
+                   onclick="Util.quitToLoginPage()">
+                    <!-- <i class="icon icon-gear size20"></i>-->
+                    <label>注销</label>
+                </a>
+            </div>
+        </header>
+        <article class="active has-header">
+            <!--<button id="fangda">放大</button>-->
+            <!--<div id="myPDF" style="display:none;"></div>-->
+            <div id="container" class="data_border" style="display:none;">
+                <img id="image" src="" style="width: 100%; height: 100%;  vertical-align:middle;">
+            </div>
+        </article>
+    </section>
+
+</div>
+
+<!--- third -->
+<script src="lib/third/jquery/jquery-2.1.3.min.js"></script>
+<script src="lib/third/jquery/jquery.mobile.custom.min.js"></script>
+<script src="lib/third/iscroll/iscroll-probe.js"></script>
+<!---  agile -->
+<script type="text/javascript" src="lib/agile/js/agile.js"></script>
+<script src="cordova.js"></script>
+<!-- app -->
+<script type="text/javascript" src="lib/app/js/app.seedsui.js"></script>
+<!--<script type="text/javascript" src="lib/agile/js/seedsui.min.js"></script>-->
+<script type="text/javascript" src="lib/custom/properties.js"></script>
+<script type="text/javascript" src="lib/custom/ui.js"></script>
+<script type="text/javascript" src="lib/custom/util.js"></script>
+
+<!-- app -->
+<script src="lib/third/exlist/agile.exlist.js"></script>
+
+<script type="text/javascript" src="script/publicMailbox.js"></script>
+<script src="./lib/base64.js"></script>
+<!--<script>-->
+<!--window.addEventListener("load", function () {-->
+<!--var f = new Form("#myform");-->
+<!--}, false);-->
+<!--</script>-->
+</body>
+</html>

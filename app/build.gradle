@@ -1,0 +1,51 @@
+apply plugin: 'com.android.application'
+
+project.ext.vectoricons = [
+        iconFontNames: [ 'Entypo.ttf','EvilIcons.ttf','Feather.ttf','FontAwesome.ttf','Foundation.ttf','Ionicons.ttf','MaterialCommunityIcons.ttf','MaterialIcons.ttf','Octicons.ttf','SimpleLineIcons.ttf', 'Zocial.ttf' ] // Name of the font files you want to copy
+]
+apply from: "../node_modules/react-native/react.gradle"
+apply from: "../node_modules/react-native-vector-icons/fonts.gradle"
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion '26.0.1'
+    defaultConfig {
+        applicationId "com.example.cocktailzy.combiecordovaandrn"
+        minSdkVersion 16
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        manifestPlaceholders = [
+                XG_ACCESS_ID : "2100307775", // 信鸽ACCESS_ID
+                XG_ACCESS_KEY: "A2ZUYJJ9613F", // 信鸽ACCESS_KEY
+                HW_APPID     : "100393617", // 华为 appid
+                PACKAGE_NAME : "com.example.cocktailzy.combiecordovaandrn"
+        ]
+        multiDexEnabled true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:appcompat-v7:26.0.1'
+    implementation 'com.android.support:design:26.0.1'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    implementation "com.facebook.react:react-native:+"
+    implementation files('libs/cordova-oa.jar')
+    implementation project(path: ':rnproject')
+    implementation project(path: ':react-native-vector-icons')
+    implementation project(path: ':react-native-xinge-push')
+}
+configurations.all {
+    resolutionStrategy.force 'com.android.support:support-annotations:26.0.1'
+    resolutionStrategy.force "com.android.support:support-v4:26.1.0"
+}

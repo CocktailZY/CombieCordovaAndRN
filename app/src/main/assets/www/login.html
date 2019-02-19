@@ -1,0 +1,535 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <!--<link rel="shortcut icon" href="seedsUi/images/favicon.ico">-->
+    <link rel="stylesheet" href="lib/agile/css/agile.layout.css">
+    <link rel="apple-touch-icon-precomposed" href="seedsUi/images/apple-touch-icon.png">
+    <title>登录</title>
+    <link rel="stylesheet" href="lib/third/seedsui/plugin/seedsui/seedsui.min.css">
+    <link rel="stylesheet" href="css/login.css">
+
+</head>
+<body ng-app="loginApp">
+<section class="active">
+    <article class="active bgImg">
+        <!--<div class="top-div-bg" style="height: 200px; width: inherit;"></div>&lt;!&ndash;style="background-color: #27AE60;height: 200px;"&ndash;&gt;-->
+        <form class="loginpanel-padding">
+            <div class="group border-none">
+                <div class="row noborder tbpadding8">
+                    <div class="row-right bg-white input-box radius40 loginBtn login-input" data-input="clear">
+                        <i class="color-placeholder icon icon-person" style="color: #00c2eb "></i>
+                        <input type="text" class="nopadding" placeholder="请输入用户名" name="username"
+                               style="height: 40px !important;"
+                               data-rule-field="用户名"
+                               data-rule="username" value='mengxu'>
+                        <i class="icon icon-clear-fill color-disable" onclick="clearbox()"
+                           style="margin-right: 10px"></i>
+                    </div>
+                </div>
+                <div class="row noborder" style="margin-top: 18px">
+                    <div class="pwdbox row-right bg-white input-box radius40 loginBtn login-input" data-input="reveal">
+                        <i class="color-placeholder icon icon-lock2" style="color: #00c2eb "></i>
+                        <input type="password" class="nopadding" placeholder="请输入密码" name="passWord"
+                               style="height: 40px !important;"
+                               data-rule-field="密码"
+                               data-rule="password" value='123abc'>
+                        <i class="color-disable icon icon-eye" onclick="showPwd()" style="margin-right: 10px"></i>
+                    </div>
+                </div>
+            </div>
+            <a class="radius40 button block loginBtn" href="javascript:;" onclick="toLogin()" style="margin-top:50px;">
+                登录
+            </a>
+            <!--<div class="group border-none">
+              <div class="row" style="float: right;padding-right: 5px;font-size: 13px;color:#36acf4">
+                <label class="js-change-account">切换账号</label>
+              </div>
+            </div>-->
+        </form>
+
+    </article>
+</section>
+<!--- third -->
+<script src="lib/third/jquery/jquery-2.1.3.min.js"></script>
+<script src="lib/third/iscroll/iscroll-probe.js"></script>
+<!---  agile -->
+<script type="text/javascript" src="lib/agile/js/agile.js"></script>
+<!-- app -->
+<script type="text/javascript" src="lib/app/js/app.seedsui.js"></script>
+
+
+<script src="lib/md5.js"></script>
+<script src="lib/custom/properties.js"></script>
+<script src="lib/custom/ui.js"></script>
+<script src="lib/custom/util.js"></script>
+<script>
+	$(document).bind("mobileinit", function() {
+		$.support.cors = true;
+		$.mobile.allowCrossDomainPages = true;
+	});
+	var isClearText = false;//密码是否不加密 默认需要加密
+	var uuid, model, platform;
+	var path;
+	var loginType = 'unauto';
+	Util.deviceReady(function () {
+		console.log('22222');
+		//获取极光注册设备id
+		//        window.plugins.jPushPlugin.getRegistrationID(function (rId) {
+		//            console.log('registrationID：' + rId);
+		//            Util.setItem('registrationId', rId);
+		//        });
+		showConsole(device);
+		console.log(device);
+		console.log(device.uuid);
+		//        uuid = device.imei;
+		uuid = device.uuid;
+		model = device.model;
+		platform = device.platform;
+		Util.setItem('uuid', uuid);
+		Util.setItem('model', model);
+		Util.setItem('platform', platform);
+		Util.setItem('signCache', "true");
+
+
+		//    var userName = Util.getItem('userName');
+		//    var passWord = Util.getItem('passWord');
+		//    if(userName && passWord){
+		//      isClearText = true;//不需要加密 因为存储起来已经加密了
+		//        $('#userFullName').text(Util.getItem('userFullName'));
+		//      $('.userInfo').eq(0).show();
+		//      $('.group').eq(0).hide();
+		//      $('[name="username"]').val(userName);
+		//      $('[name="passWord"]').val(passWord);
+		//    }else{
+		//      $('.userInfo').eq(0).hide();
+		//      $('.group').eq(0).show();
+		//    }
+
+		//        window.plugins.jPushPlugin.deleteAlias({ 'sequence': 1 },function(data){
+		//            showConsole('success delete');
+		//        },function(){
+		//            showConsole('failed delete');
+		//        });
+
+		if (device.platform.toLowerCase() == 'ios') {
+			path = cordova.file.documentsDirectory + localFileName;
+		} else {
+			path = cordova.file.externalDataDirectory + localFileName;
+		}
+		if (Util.queryString('type') != 'loginout') {
+			checkFileExited(path, function (entry) {
+				//读文件
+				readFile(entry, function (userinfo) {
+					$('[name="username"]').val(userinfo.uname);
+					$('[name="passWord"]').val(userinfo.pwd);
+					loginType = 'auto';
+					checkLoginStatus(userinfo.uname, userinfo.pwd);
+				}, function () {
+				});
+			}, function () {
+			});
+		} else {
+			removeLocalFile(path);
+		}
+
+	});
+
+	function clearbox() {
+		$('[name="username"]').val('');
+	}
+
+	function showPwd() {
+		if ($('.pwdbox .color-disable').hasClass("icon-eye")) {
+			$('[name="passWord"]').attr('type', 'text');
+			$('.pwdbox .color-disable').removeClass().addClass("color-disable icon icon-eye-fill");
+			$('.pwdbox .color-disable').attr('onclick', 'hidePwd()');
+		} else {
+			hidePwd();
+		}
+	}
+
+	function hidePwd() {
+		$('[name="passWord"]').attr('type', 'password');
+		$('.pwdbox .color-disable').removeClass().addClass("color-disable icon icon-eye");
+		$('.pwdbox .color-disable').attr('onclick', 'showPwd()');
+	}
+
+	function toLogin() {
+		var userName = $('[name="username"]').val();
+		var passWord = $('[name="passWord"]').val();
+		checkLoginStatus(userName, passWord);
+	}
+
+	function login() {
+		var userName = $('[name="username"]').val();
+		var passWord = $('[name="passWord"]').val();
+		if (userName && passWord) {
+			loginByAjax({
+				url: base + 'MobileLogin/login',
+//                url: 'http://192.168.81.36:8091/oa/MobileLogin/login',
+//                url: 'http://192.168.81.12:8080/oa/MobileLogin/login',
+				data: {
+					userName: userName,
+					passWord: hex_md5(passWord),
+					uuid: uuid,
+					type: loginType
+				},
+				async: true
+			}, function (data) {
+				showConsole('---------------------');
+				showConsole(data);
+				showConsole('---------------------');
+				if (data.status != '3') {
+					Util.setItem('userFullName', data.userFullName);
+					Util.setItem('ticket', data.ticket);
+					Util.setItem('sysid', data.sysid);
+					Util.setItem('orgid', data.orgid);
+					Util.setItem('userid', data.userid);
+					Util.setItem('username', userName);
+					Util.setItem('password', passWord);
+					Util.setItem('deptid', data.deptList.deptInfo[0].deptid);
+					Util.setItem('isUpdate', true);
+
+					//构造部门数据------------------------
+					var deptObj = [];
+					for (var i = 0; i < data.deptList.deptInfo.length; i++) {
+						var item = data.deptList.deptInfo[i];
+						var tempObj = {deptid: item.deptid, name: item.deptname};
+						deptObj.push(tempObj);
+					}
+//                    var deptObj = [{deptid:'97333',name:'收发室'},{deptid:'99814',name:'数字办2'}];
+					Util.setItem('deptList', JSON.stringify(deptObj));
+				}
+				if (data.status == '1' || data.status == '12') {
+					//window.location.href = "index.html";
+					//获取用户信息
+					showUserInfo();
+					getMacAndCheck();
+				} else if (data.status == '3') {
+					checkFileExited(path, function (entry) {
+						removeLocalFile(path);
+					}, function (error) {
+					});
+					A.showToast('用户名和密码不匹配！');
+				} else if (data.status == '4' || data.status == '5') {
+					//获取用户信息
+					showUserInfo();
+					//当天连续登录，两次登录时间小于1天
+					getMacAndCheck('login');
+//                    window.location.href = "index.html?type=login";
+				} else if (data.status == '6') {
+					//登录时间大于5天
+					checkFileExited(path, function (entry) {
+						removeLocalFile(path);
+					}, function (error) {
+					});
+					$('[name="username"]').val('');
+					$('[name="passWord"]').val('');
+					loginType = 'unauto';
+				} else if (data.status == '7') {
+					//设备未通过
+//                    getMacAndCheck();
+//                    showUserInfo();
+					window.location.href = "passHtml.html?status=4&loginType=" + loginType;
+				} else if (data.status == '10') {
+					//获取用户信息
+					showUserInfo();
+					APP_LOCK_STATUS = false;
+					Util.setItem('superUser', 'superUser');
+					window.location.href = 'index.html';
+				} else if (data.status == '11') {
+					showUserInfo();
+					window.location.href = "index.html?checkType=no";
+				}
+			}, {isShow: true, loadingMsg: '正在登录'})
+		} else {
+			A.showToast('用户名或密码不能为空！');
+		}
+	}
+
+	//添加用户到邮件系统中
+	function addMailUser() {
+		getDataByAjax({
+			url: base + 'mailuser/add',
+			// url:'http://192.168.81.36:8086/oa/mailuser/add',
+			data: {
+				// id:Util.getItem('userid'),
+				ticket: Util.getItem('ticket'),
+				uuid: uuid,
+				uid: Util.getItem("email"),
+				password: 1,
+				realname: Util.getItem('userFullName'),
+				telephone: Util.getItem("phone"),
+				organize: "",
+				mailboxsize: 1000
+			},
+			async: true
+		}, function (data) {
+			if (data.status.trim() == "Success") {
+				showConsole("添加用户成功");
+			} else {
+				showConsole("添加用户失败原因:" + data.description);
+//                A.showToast('添加用户失败，请联系管理员');
+				return;
+			}
+
+		});
+	}
+
+	//判断用户是否已经在邮箱系统中
+	function checkMailUser() {
+		var flag = false;
+		getDataByAjax({
+			url: base + 'mailuser/check',
+			//url:'http://192.168.81.36:8086/oa/mailuser/check',
+			data: {
+				// id:userid,
+				ticket: Util.getItem('ticket'),
+				uuid: uuid,
+				uid: Util.getItem("email")
+			},
+			async: true
+		}, function (data) {
+			if (data.status.trim() == "Success") {
+				flag = true;
+			}
+
+		});
+
+		return flag;
+	}
+
+	//获取用户信息
+	function showUserInfo() {
+		getDataByAjax({
+			url: base + 'MobileFlow/getUserInfo',
+			//url:'http://192.168.81.36:8086/oa/MobileFlow/getUserInfo',
+			data: {
+				id: Util.getItem('userid'),
+				ticket: Util.getItem('ticket'),
+				uuid: Util.getItem('uuid')
+			},
+			async: true
+		}, function (data) {
+			var userInfo = data.userInfo.userInfo[0];
+			Util.setItem("headImg", userInfo["imagepath"].split('=')[1]);
+			Util.setItem("email", userInfo["email"]);
+			Util.setItem("phone", userInfo["phone"]);
+			//  showConsole("查询用户信息：" + userInfo["email"]);
+
+		});
+	}
+
+	//检查设备绑定状态
+	function getMacAndCheck(type) {
+//        if(Util.getItem('registrationId') && Util.getItem('registrationId') != '') {
+		//生成推送sequence
+		var temp_uuid = new Date().getTime() + '' + Math.random() * 100;
+		var sequence = Math.floor(parseInt(temp_uuid));
+		Util.setItem('sequence', sequence);
+
+		//获取mac_address
+		MacAddress.getMacAddress(
+			function (macAddress) {
+				// alert('enter getmac');
+				getDataByAjax({
+//                    url:'http://192.168.81.36:8091/oa/mobileEquipment/check',
+					url: base + 'mobileEquipment/check',
+					data: {
+//                        mobileMax:macAddress,
+						model: Util.getItem('model'),
+						uuid: uuid,
+						ticket: Util.getItem('ticket'),
+						userid: Util.getItem('userid'),
+						type: 'check',
+//                        userName:Util.getItem('userFullName'),
+						platform: Util.getItem('platform')
+					}
+				}, function (data) {
+					Util.setItem('macAddress', macAddress);
+					if (data.status == '0' || data.status == '4' || data.status == '8') {
+						window.location.href = "passHtml.html?status=" + data.status + "&loginType=" + loginType;
+						//已提交申请
+					} else if (data.status == '1') {
+						//已绑定
+						if (APP_LOCK_STATUS && loginType == 'auto') {
+							//获取应用锁状态
+							getDataByAjax({
+								// url: 'http://192.168.81.36:8091/oa/applicationLock/getModel',
+								url: base + 'applicationLock/getModel',
+								data: {
+									uuid: Util.getItem('uuid'),
+									ticket: Util.getItem('ticket'),
+									userId: Util.getItem('userid')
+								},
+								async: true,
+							}, function (data) {
+								Util.redirectLogin(data.result);
+								if (data != null && data != '') {
+									var isLock = data.isOpenLock;
+									var appLockPwd = data.applicationLock;
+									var fingerLock = data.isOpenFingerprintLock;
+									Util.setItem('isLock', isLock);
+									Util.setItem('appLockPwd', appLockPwd);
+									Util.setItem('fingerLock', fingerLock);
+
+									if (appLockPwd && isLock == '1') {
+										Util.setItem('handspwd', appLockPwd);
+										window.location.href = 'appLock.html?stepType=toIndex';
+									} else if (fingerLock == '1') {
+										window.location.href = 'finger.html?stepType=toIndex';
+									} else {
+										window.location.href = "index.html?type=" + type;
+									}
+								} else {
+									showConsole('data is null');
+								}
+
+							}, {isShow: false})
+						} else {
+							getDataByAjax({
+//                                    url: 'http://192.168.81.36:8085/oa/applicationLock/update',
+								url: base + 'applicationLock/update',
+								data: {
+									uuid: Util.getItem('uuid'),
+									ticket: Util.getItem('ticket'),
+									userId: Util.getItem('userid'),
+									applicationLock: Util.getItem('appLockPwd'),
+									isOpenLock: '1',
+									errorCount: '1'
+								}
+							}, function (data) {
+								window.location.href = "index.html?type=" + type;
+							}, {isShow: false})
+
+						}
+					} else if (data.status == '7') {
+						//第一次申请
+//                        A.confirm('是否重新提交申请',function(){
+						//获取极光注册设备id
+//                        window.plugins.jPushPlugin.getRegistrationID(function (rId) {
+//                            Util.setItem('registrationId', rId);
+						getDataByAjax({
+//                                url:'http://192.168.81.36:8091/oa/mobileEquipment/boundmobileEquipment',
+							url: base + 'mobileEquipment/boundmobileEquipment',
+							data: {
+								mobileMax: macAddress,
+								model: Util.getItem('model'),
+								uuid: uuid,
+								ticket: Util.getItem('ticket'),
+								userid: Util.getItem('userid'),
+								userName: Util.getItem('userFullName'),
+								platform: Util.getItem('platform'),
+								deptid: Util.getItem('deptid'),
+								alias: Util.getItem('sequence'),
+								registrationId: '1'
+							}
+
+						}, function (data) {
+							if (data != null && data.id != null && data.id != '') {
+								window.location.href = "passHtml.html?status=0";
+							} else {
+								A.showToast('提交申请失败!');
+							}
+						}, null)
+//                        });
+//                        })
+					} else if (data.status == '3') {
+						//已被其他用户绑定
+						A.showToast('该设备已被其他用户绑定！');
+					}
+				})
+			}, function (fail) {
+				showConsole(fail)
+			}
+		);
+//        }
+//        }else{
+//            A.alert('检测到您的网络环境可能出现问题，请更换网络环境');
+//        }
+	}
+
+	//检查登录状态
+	function checkLoginStatus(userName, passWord) {
+		getDataByAjax({
+//            url: 'http://192.168.81.36:8091/oa/mobileEquipment/mobileEquipmentInfo',
+			url: base + 'mobileEquipment/mobileEquipmentInfo',
+			data: {
+				uuid: Util.getItem('uuid'),
+				userName: userName,
+				passWord: hex_md5(passWord),
+			},
+			async: false
+		}, function (data) {
+			console.log(data);
+			if (data.status == '2') {
+				A.confirm('提醒', '该用户已在其他设备登录，是否继续登录', function () {
+					login();
+				});
+			} else {
+				login();
+			}
+		}, {isShow: false});
+	}
+
+	//更新登录状态
+	//    function updateStatus(){
+	//        getDataByAjax({
+	//            url: 'http://192.168.81.36:8091/oa/MobileLogin/updateLoginStatus',
+	//            data:{
+	//                ticket:Util.getItem('ticket'),
+	//                uuid:Util.getItem('uuid'),
+	//                userid:Util.getItem('userid')
+	//            },
+	//            async: true,
+	//        },function(data){
+	//            //状态修改成功
+	//            if(data.status != '1'){
+	//                return
+	//            }
+	//        },{isShow:false})
+	//    }
+
+</script>
+<script>
+	/*$('.js-change-account').on(A.options.clickEvent, function(){
+      A.actionsheet([{
+        text : '切换账号',
+        handler : function(){
+          isClearText = false;//登录时 需要加密密码
+          $('.userInfo').eq(0).hide();
+          $('.group').eq(0).show();
+
+          $('[name="username"]').val('');
+          $('[name="passWord"]').val('');
+        }
+      }]);
+      return false;
+    });*/
+
+	window.addEventListener('native.keyboardshow', function (e) {
+		showConsole('Keyboard height is: ' + e.keyboardHeight);
+//        $('article.active').css('top', -parseFloat(e.keyboardHeight -222));
+//        $('article.active').css('top', 'initial');
+		$('.loginpanel-padding').css('margin-top', '40%');
+//        $('.loginpanel-padding a').css('margin-top','40px');
+	});
+
+
+	window.addEventListener('native.keyboardhide', function (e) {
+//        $('article.active').css('top', '44px');
+		$('.loginpanel-padding').css('margin-top', '50%');
+//        $('article.active').css('top', '0px');
+//        $('.loginpanel-padding a').css('margin-top','107px');
+	});
+
+</script>
+<script src="cordova.js"></script>
+</body>
+</html>

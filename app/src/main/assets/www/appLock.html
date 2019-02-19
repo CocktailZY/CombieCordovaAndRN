@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>设置</title>
+    <link rel="stylesheet" href="lib/agile/css/agile.layout.css">
+    <link rel="stylesheet" href="lib/third/seedsui/plugin/seedsui/seedsui.min.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<div id="section_container">
+    <!--设置应用锁-->
+    <section id="setlock_section" data-role="section">
+        <!--头部-->
+        <header>
+            <div class="titlebar reverse">
+                <a class="titlebar-button" id="backbtn" data-click="window.location.href = 'appLockStatus.html';">
+                    <!-- href="javascript:back()"-->
+                    <i class="icon icon-arrowleft"></i>返回
+                    <!--<i class="icon icon-user"></i>
+                    <span class="text-ellipsis" name="userFullNameText"></span>-->
+                </a>
+                <h1 class="titlebar-title text-center">手势解锁</h1>
+                <a style="padding:0 8px; visibility: hidden" id="updatePassword">
+                    <label>重置</label>
+                </a>
+            </div>
+        </header>
+        <article class="active has-header det-backcolor" id="setlock_article" data-role="article">
+
+        </article>
+        <footer>
+            <div class="det-backcolor full-width text-center" id="forgetDiv" style="display: none;padding-top: 8px;padding-bottom: 16px;">
+                <a data-click="forgetPwd()" style="color: #dddddd;">
+                    忘记密码
+                </a>
+            </div>
+        </footer>
+    </section>
+</div>
+
+<!--- third -->
+<script src="lib/third/jquery/jquery-2.1.3.min.js"></script>
+<script src="lib/third/jquery/jquery.mobile.custom.min.js"></script>
+<script src="lib/third/iscroll/iscroll-probe.js"></script>
+<!--- agile -->
+<script type="text/javascript" src="lib/agile/js/agile.js"></script>
+<script src="cordova.js"></script>
+<!-- h5lock -->
+<script src="lib/H5lock.js"></script>
+<!-- app -->
+<script type="text/javascript" src="lib/app/js/app.seedsui.js"></script>
+<script src="lib/md5.js"></script>
+<script type="text/javascript" src="lib/custom/properties.js"></script>
+<script type="text/javascript" src="lib/custom/ui.js"></script>
+<script type="text/javascript" src="lib/custom/util.js"></script>
+<script type="text/javascript" src="script/appLock.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!-- HTML5文件 -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <title>Agile Lite</title>
+    <link rel="stylesheet" href="lib/agile/css/agile.layout.css">
+    <link rel="stylesheet" href="lib/third/seedsui/plugin/seedsui/seedsui.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/workring.css">
+</head>
+<body>
+
+<div id="section_container">
+    <section id="work-section" data-role="section">
+        <!--头部-->
+        <header>
+            <div class="titlebar reverse">
+                <a class="titlebar-button" onclick="window.location.href = 'index.html?checkType=no';"><!-- href="javascript:back()"-->
+                    <i class="icon icon-arrowleft"></i>首页
+                    <!--<i class="icon icon-user"></i>
+                    <span class="text-ellipsis" name="userFullNameText"></span>-->
+                </a>
+                <h1 class="titlebar-title text-center">工作圈</h1>
+                <a style="padding:0 8px;" onclick="A.Controller.section('#add-section')">
+                     <i class="icon icon-rdoadd size24"></i>
+                    <!--<label>注销</label>-->
+                </a>
+            </div>
+        </header>
+        <article class="active" id="work-article" data-role="article" style="top:44px !important;" data-scroll-options="{click:false,tap:true}">
+            <div id="workScroller" class="full" data-scroll="pulldown" data-scroll-options="{click:false,tap:true}">
+                <div class="scroller">
+                        <ul class="list noclick" id="workScroller_ul_1">
+                             <!--<li class="tbpadding8">
+                                <div class="clearfix">
+                                    <div class="float-left" style="width: 15%">
+                                        <img src="" width="50" height="50" style="background-color: #ffff00;">
+                                    </div>
+                                    <div class="float-left" style="width: 85%;">
+                                        <div>张三</div>
+                                        <div class="workcontent">
+                                            <p class="shortContent">古巴比伦王</p>
+                                        </div>
+                                        <ul data-col="3" class="grid album">
+                                            <li class="noborder" style="width: 29%;"><img src="" width="80" height="80" style="border: 1px solid darkred"></li>
+                                            <li class="noborder" style="width: 29%;"><img src="" width="80" height="80" style="border: 1px solid darkred"></li>
+                                            <li class="noborder" style="width: 29%;"><img src="" width="80" height="80" style="border: 1px solid darkred"></li>
+                                            <li class="noborder" style="width: 29%;"><img src="" width="80" height="80" style="border: 1px solid darkred"></li>
+                                            <li class="noborder" style="width: 29%;"><img src="" width="80" height="80" style="border: 1px solid darkred"></li>
+                                            <li class="noborder" style="width: 29%;"><img src="" width="80" height="80" style="border: 1px solid darkred"></li>
+                                            <li class="noborder" style="width: 29%;"><img src="" width="80" height="80" style="border: 1px solid darkred"></li>
+                                            <li class="noborder" style="width: 29%;"><img src="" width="80" height="80" style="border: 1px solid darkred"></li>
+                                            <li class="noborder" style="width: 29%;"><img src="" width="80" height="80" style="border: 1px solid darkred"></li>
+                                        </ul>
+                                        <div>
+                                            <p onclick="alert('id1')">附件1</p>
+                                            <p onclick="alert('id2')">附件2</p>
+                                        </div>
+                                        <div class="full-width clearfix">
+                                            <div class="float-left" style="width: 50%"><small>1小时前</small></div>
+                                            <div class="float-right" style="width: 50%;text-align: right;">
+                                                <a onclick="comment()"><i class="icon icon-chat"></i>评论</a>
+                                            </div>
+                                        </div>
+                                        <div class="full-width" style="background-color: #e9e9e9">
+                                            <div>
+                                                <a onclick="alert('回复id')">
+                                                    <span style="color: #4f9fcf">{张三}:</span>
+                                                    <span style="color:#000;">12345</span>
+                                                </a>
+                                            </div>
+                                            <div>
+                                                <a onclick="alert('回复id')">
+                                                    <span style="color: #4f9fcf">{张三}</span>
+                                                    <span style="color:#000;">回复</span>
+                                                    <span style="color: #4f9fcf">{李四}:</span>
+                                                    <span style="color:#000;">上山打老虎</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>-->
+                        </ul>
+                </div>
+            </div>
+        </article>
+        <footer>
+            <figure id="richeditor" class="richedit" style="display: none;">
+                <figcaption id="figcap">
+                    <div class="input">
+                        <textarea id="inputBox" style="height: 32px;"></textarea>
+                        <pre><span></span><br></pre>
+                    </div>
+                    <a class="button desaturate outline" id="sendBtn" href="javascript:sent()">发送</a>
+                </figcaption>
+            </figure>
+            <div class="mask"></div>
+        </footer>
+    </section>
+    <section id="add-section" data-role="section">
+        <!--头部-->
+        <header>
+            <div class="titlebar reverse">
+                <a class="titlebar-button" onclick="javascript:back()"><!-- href="javascript:back()"-->
+                    <i class="icon icon-arrowleft"></i>返回
+                    <!--<i class="icon icon-user"></i>
+                    <span class="text-ellipsis" name="userFullNameText"></span>-->
+                </a>
+                <h1 class="titlebar-title text-center" style="visibility: hidden">发布</h1>
+                <a class="titlebar-button button white outline loginOutBtn noborder" style="padding:0 8px;"
+                   onclick="sendWorkRing()">
+                    <!-- <i class="icon icon-gear size20"></i>-->
+                    <label>发送</label>
+                </a>
+            </div>
+        </header>
+        <article class="active" id="add-article" data-role="article" style="top:44px !important;background-color: #f8f8f8;">
+            <div id="addScroller" class="active full-width" data-scroll="vertical">
+                <div class="scroller">
+                    <form id="add-form bg-white">
+                        <div>
+                            <div class="input-box noborder">
+                                <textarea id="noborder" class="noborder" placeholder="想说点什么？"></textarea>
+                            </div>
+                            <div class="bg-white lrpadding8 pb8">
+                                <ul data-col="5" class="grid" id="add_img">
+                                    <!--<li class="noborder">-->
+                                        <!--<div>-->
+                                            <!--<div class="del-icon">-->
+                                                <!--<i class="icon icon-clear-fill size20"></i>-->
+                                            <!--</div>-->
+                                            <!--<div class="photo size60 radius4" style="background-image:url(http://robort007.github.io/SeedsUI/preview/img/list/weixin.png)">-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+                                    <!--</li>-->
+                                    <li class="add-icon" id="add_icon">
+                                        <a style="border: 1px solid #e9e9e9;border-radius: 3px;" onclick="filePicker()">
+                                            <i class="icon icon-add size54" style="color: #e9e9e9;"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </article>
+    </section>
+</div>
+
+<!--<script type="text/html" id="chooseDialog">-->
+    <!--<div style="padding:10px 10px;">-->
+        <!--<a style="color: #333333;" onclick="chooseImg()">打开相册</a>-->
+    <!--</div>-->
+    <!--&lt;!&ndash;<div style="padding:10px 10px;">&ndash;&gt;-->
+        <!--&lt;!&ndash;<a style="color: #333333;" onclick="chooseFile()">选择文件</a>&ndash;&gt;-->
+        <!--&lt;!&ndash;&lt;!&ndash;<input id="file" type="file" style="position: absolute;top: 50px;height: 10px;left: 9px;z-index: 1;opacity: 0;">&ndash;&gt;&ndash;&gt;-->
+    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--</script>-->
+
+
+<!--- third -->
+<script src="lib/third/jquery/jquery-2.1.3.min.js"></script>
+<script src="lib/third/jquery/jquery.mobile.custom.min.js"></script>
+<script src="lib/third/iscroll/iscroll-probe.js"></script>
+<!---  agile -->
+<!--<script src="lib/touch.js"></script>-->
+<script type="text/javascript" src="lib/agile/js/agile.js"></script>
+<script src="lib/previewImage.js"></script>
+<script src="cordova.js"></script>
+<!-- app -->
+<script type="text/javascript" src="lib/app/js/app.seedsui.js"></script>
+<script type="text/javascript" src="lib/custom/properties.js"></script>
+<script type="text/javascript" src="lib/custom/ui.js"></script>
+<script type="text/javascript" src="lib/custom/util.js"></script>
+<script type="text/javascript" src="script/workRing.js"></script>
+<script type="text/javascript" src="script/diskCache.js"></script>
+</body>
+</html>

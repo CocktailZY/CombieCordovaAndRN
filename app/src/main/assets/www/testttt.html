@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>H5lock</title>
+
+</head>
+<body>
+<div id="testDiv">
+    <img id="myimg">
+    <button style="position: absolute;z-index: 3; bottom:15px;" onclick="window.location.reload();">刷新</button>
+</div>
+<!--- third -->
+<script src="lib/third/jquery/jquery-2.1.3.min.js"></script>
+<script src="lib/third/iscroll/iscroll-probe.js"></script>
+<!---  agile -->
+<script type="text/javascript" src="lib/agile/js/agile.js"></script>
+<!-- app -->
+<script type="text/javascript" src="lib/app/js/app.seedsui.js"></script>
+<script src="cordova.js"></script>
+
+<script src="lib/md5.js"></script>
+<script src="lib/custom/properties.js"></script>
+<script src="lib/custom/ui.js"></script>
+<script src="lib/custom/util.js"></script>
+<script type="text/javascript">
+    Util.deviceReady(function () {
+        var netUrl = 'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1092454450,3686281552&fm=27&gp=0.jpg';
+        var filename = 'a.jpg';
+        var path = cordova.file.externalApplicationStorageDirectory + 'imgs/' + filename;
+        window.resolveLocalFileSystemURL(path, function () {
+            $('#myimg').attr('src', path);
+            $('#myimg').attr('width', $(window).width());
+            $('#myimg').attr('height', $(window).height());
+        }, function () {
+            createLocalFile(filename, '', 'android');
+            var source = netUrl;
+            var target = path;
+            var fileTransfer = new FileTransfer();
+            fileTransfer.download(encodeURI(source), target, function (data) {
+                alert(JSON.stringify(data));
+                $('#myimg').attr('src', path);
+                $('#myimg').attr('width', $(window).width());
+                $('#myimg').attr('height', $(window).height());
+            }, function (error) {
+                A.showToast('获取文件失败');
+            });
+        });
+    });
+    function createLocalFile(fileName, user, platform) {
+        if (platform.toLowerCase() == 'android') {
+            window.requestFileSystem(LocalFileSystem.PERSISTENT, 5 * 1024 * 1024, function (fs) {
+                fs.root.getDirectory('Android', {create: false}, function (androidEntry) {
+                    androidEntry.getDirectory('data', {create: false}, function (dirEntry) {
+                        dirEntry.getDirectory('com.zz.oa', {create: false}, function (dirEntry) {
+                            dirEntry.getDirectory('imgs', {create: true, exclusive: false}, function (subDirEntry) {
+                                console.log('imgs文件夹创建成功!');
+                            }, function () {console.log('files_error')});
+                        }, function () {console.log('com.zz.oa_error')});
+                    },function () { console.log('data_error')});
+                }, function () {
+                    console.log('Android_error')
+                });
+            });
+        } else {
+            window.requestFileSystem(LocalFileSystem.PERSISTENT, 5 * 1024 * 1024, function (fs) {
+                fs.root.getFile(fileName, {create: true, exclusive: false}, function (fileEntity) {
+                    console.info(fileEntity);
+                    console.log('文件地址：' + fileEntity.toURL()); //file:///data/data/io.cordova.myapp84ea27/files/files/test1.txt
+                    writeFile(fileEntity, user);
+                }, function () {
+                    console.log('createfile_error')
+                });
+            }, function () {
+                console.log('Android_error')
+            });
+        }
+    }
+
+</script>
+</body>
+</html>

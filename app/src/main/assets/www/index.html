@@ -1,0 +1,216 @@
+<!-- HTML5文件 -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <title>首页</title>
+    <link rel="stylesheet" href="lib/agile/css/agile.layout.css">
+    <link rel="stylesheet" href="lib/third/seedsui/plugin/seedsui/seedsui.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/jiedian.css">
+</head>
+<body class="platform-android platform-cordova platform-webview">
+
+<div id="section_container">
+    <section id="sy-section" data-role="section">
+        <article class="active has-footer" id="sy-article" data-role="article"
+                 style="background-color:#f8f8f8;">
+            <div id="outScroller" class="full active" data-scroll="verticle">
+                <div class="scroller">
+                    <div id="sySlider" class="full-width" data-role="slider">
+                        <div class="scroller">
+                            <div class="slide">
+                                <img class="full-width" data-source="images/sybg3.png" style="opacity: 1;">
+                            </div>
+                            <div class="slide">
+                                <img class="full-width" data-source="images/sybg1.png" style="opacity: 1;">
+                            </div>
+                            <div class="slide">
+                                <img class="full-width" data-source="images/sybg2.png" style="opacity: 1;">
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 13px;margin-bottom: 12px;">
+                        <div class="bg-white" style="padding-left: 28px;">
+                            <div style="font-size: 13px;">
+                                <span style="border: 1px solid #278EEE;margin-right: 21px;border-radius:3px;margin-top: 13px;margin-bottom: 15px;padding-top: 2px;padding-bottom: 2px;padding-left: 4px;padding-right: 4px;">公告</span>
+                                <span id="gonggao" style="text-overflow: ellipsis;width:75%;overflow: hidden;white-space: nowrap;"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white" style="margin-bottom: 50px;">
+                        <ul class="grid size54" data-col="3" data-rowspace="10">
+                            <li>
+                                <a class="photo" style="background-color: #02d5bf;" href="gongwenManage.html" id="gwIcon">
+                                    <div class="tip" style="position:absolute;top:-4px;right:-4px;display: none;" id="gongwenNum"></div>
+                                    <i class="icon icon-fileadd-fill"></i>
+                                </a>
+                                <label>公文管理</label>
+                            </li>
+                            <li>
+                                <a class="photo" style="background-color: #DFA5F7;" href="expressManage.html" id="kdIcon">
+                                    <div class="tip" style="position:absolute;top:-4px;right:-4px;display: none;" id="expressNum"></div>
+                                    <i class="icon icon-notepad-fill"></i>
+                                    <!--<span class="badge">999</span>-->
+                                </a>
+                                <label>省府快递</label>
+                            </li>
+                            <li style="display: block;">
+                                <a class="photo" style="background-color: #dfac9a;" href="meeting.html">
+                                    <div class="tip" style="position:absolute;top:-4px;right:-4px;display: none;" id="meetNum"></div>
+                                    <i class="icon icon-rdohistory-fill"></i>
+                                    <!--<span class="badge">999</span>-->
+                                </a>
+                                <label>会议通知</label>
+                            </li>
+                            <li>
+                                <a class="photo" style="background-color: #5095f2;" href="infopublish.html">
+                                    <i class="icon icon-news-fill"></i>
+                                    <!--<span class="badge">999</span>-->
+                                </a>
+                                <label>信息发布</label>
+                            </li>
+                            <!--<li>-->
+                                <!--<a class="photo" style="background-color: #4fc9f0;"-->
+                                   <!--onclick="window.location.href='workRing.html'">-->
+                                    <!--<i class="icon icon-fweixin"></i>-->
+                                <!--</a>-->
+                                <!--<label>工作圈</label>-->
+                            <!--</li>-->
+                            <li>
+                                <a class="photo" style="background-color: #4fc9f0;" href="noticeList.html">
+                                    <i class="icon-soundmax-fill size30"></i>
+                                </a>
+                                <label>公告</label>
+                            </li>
+                            <li>
+                                <a class="photo" style="background-color: #8cda46;" href="calendar.html">
+                                    <i class="icon icon-calendar-fill"></i>
+                                </a>
+                                <label>日程安排</label>
+                            </li>
+                            <li>
+                                <a class="photo" style="background-color: #ffd232;" href="deptList.html">
+                                    <i class="icon icon-contact-fill"></i>
+                                </a>
+                                <label>通讯录</label>
+                            </li>
+                            <li id="mail_li">
+                                <a class="photo" style="background-color: #ff9e1f;" onclick="checkMail()">
+                                    <i class="icon icon-mail-fill"></i>
+                                </a>
+                                <label>邮件</label>
+                            </li>
+
+                            <li>
+                                <a class="photo" style="background-color: #4fc9f0;" onclick="testToRN()">
+                                    <i class="icon icon-fweixin"></i>
+                                </a>
+                                <label>跳转RN</label>
+                            </li>
+                            <!--<li>-->
+                                <!--<a class="photo" style="background-color: #4fc9f0;" onclick="A.alert(Util.getItem('deptid'));">-->
+                                    <!--<i class="icon icon-fweixin"></i>-->
+                                <!--</a>-->
+                                <!--<label>测试部门更换</label>-->
+                            <!--</li>-->
+							<!--<li id="fingerLockLi" style="display: none;">
+                                <a class="photo" style="background-color: #4fc9f0;" data-click="testFingerLock()">
+                                    <i class="icon icon-fweixin"></i>
+                                </a>
+                                <label>测试指纹锁检测</label>
+                            </li>
+
+                            <li id="fingerLockLi" style="">
+                                <a class="photo" style="background-color: #4fc9f0;" data-click="loadImage()">
+                                    <i class="icon icon-fweixin"></i>
+                                </a>
+                                <label>获取图片</label>
+                            </li>
+                            <li id="fingerLockLi" style="">
+                                <a class="photo" style="background-color: #4fc9f0;" data-click="diskCacheSize()">
+                                    <i class="icon icon-fweixin"></i>
+                                </a>
+                                <label>缓存空间</label>
+                            </li>
+                            <li id="fingerLockLi" style="">
+                                <a class="photo" style="background-color: #4fc9f0;" data-click="clearDiskCache()">
+                                    <i class="icon icon-fweixin"></i>
+                                </a>
+                                <label>清除缓存</label>
+                            </li>
+                            <li id="fingerLockLi" style="">
+                                <img id="imgaa" src="">
+                            </li>-->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </article>
+        <footer>
+            <ul class="menubar bar-footer-fixed tabbar-footer">
+                <li class="tab active">
+                    <i class="icon icon-home-fill"></i>
+                    <label class="tab-label">首页</label>
+                </li>
+                <li class="tab" data-click="window.location.href='toDoList.html?fhtp=2'">
+                    <i class="icon icon-fileperson"></i>
+                    <label class="tab-label">待办</label>
+                    <!--<i class="bg-tip radiusround size8 bottomBarPoint" id="db_point"></i>-->
+                </li>
+                <li class="tab" data-click="window.location.href='toSignList.html?fhtp=2'">
+                    <i class="icon icon-write"></i>
+                    <label class="tab-label">待签</label>
+                    <!--<i class="bg-tip radiusround size8 bottomBarPoint" id="dq_point"></i>-->
+                </li>
+                <li class="tab" data-role="tab" href="#workRing" data-toggle="html" id="workring_li">
+                    <i class="icon icon-fweixin"></i>
+                    <label class="tab-label">工作圈</label>
+                </li>
+                <li class="tab" data-role="tab" href="#setting" data-toggle="html">
+                    <i class="icon icon-person"></i>
+                    <label class="tab-label">我的</label>
+                </li>
+            </ul>
+        </footer>
+    </section>
+</div>
+
+<script type="text/html" id="progressDialog">
+    <div style="text-align:center;font-size:20px;color:#3498DB;font-weight:600;margin:5px 0;">版本更新</div>
+    <div class="progress-bar striped radius8 lrmargin8">
+        <span class="progress animated" id="progress_num" style="width: 0px;"></span>
+    </div>
+    <div class="rowspace"></div>
+    <span class="text-center full-width" id="percent_num"></span>
+    <div class="rowspace"></div>
+</script>
+<script type="text/html" id="checkMailDialog">
+    <div class="agile-popup-title">抱歉</div>
+    <div class="agile-popup-content">
+        <p>您所使用的用户没有绑定邮箱!</p>
+        <div class="rowspace"></div>
+        <p>请登录电脑端进行绑定后即可正常访问该系统</p>
+    </div>
+    <div class="agile-popup-handler">
+        <a data-toggle="popup" class="agile-popup-handler-ok">确定</a>
+    </div>
+</script>
+<!--- third -->
+<script src="lib/third/jquery/jquery-2.1.3.min.js"></script>
+<script src="lib/third/jquery/jquery.mobile.custom.min.js"></script>
+<script src="lib/third/iscroll/iscroll-probe.js"></script>
+<!---  agile -->
+<script type="text/javascript" src="lib/agile/js/agile.js"></script>
+<script src="cordova.js"></script>
+<!-- app -->
+<script type="text/javascript" src="lib/app/js/app.seedsui.js"></script>
+<script type="text/javascript" src="lib/custom/properties.js"></script>
+<script type="text/javascript" src="lib/custom/ui.js"></script>
+<script type="text/javascript" src="lib/custom/util.js"></script>
+<script type="text/javascript" src="script/index.js"></script>
+<script type="text/javascript" src="script/diskCache.js"></script>
+</body>
+</html>

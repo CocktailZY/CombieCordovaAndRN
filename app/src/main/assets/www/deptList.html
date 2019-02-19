@@ -1,0 +1,182 @@
+<!-- HTML5文件 -->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+  <title>待办列表</title>
+  <link rel="stylesheet" href="lib/agile/css/agile.layout.css">
+  <link rel="stylesheet" href="lib/third/seedsui/plugin/seedsui/seedsui.min.css">
+  <link rel="stylesheet" href="css/main.css">
+  <style>
+    .treetitle {
+      height: 60px;
+      line-height: 40px;
+    }
+    .treetitle .icon.radiusround {
+      color: #fff!important;
+    }
+
+    .icon-arrowright.showdowm {
+      transform: rotate(92deg);
+      transform-origin: 74% 26%;
+    }
+
+    .treetitle:active {
+      background-color: transparent;
+    }
+    .deptTabActive {
+      background-color: #278EEE;
+    }
+  </style>
+</head>
+<body>
+<div id="section_container">
+  <!--通讯录section-->
+  <section id="deptList-section" data-role="section">
+    <!--头部-->
+    <header>
+      <div class="titlebar reverse">
+        <a class="titlebar-button" onclick="window.location.href = 'index.html?checkType=no';"><!-- href="javascript:back()"-->
+          <i class="icon icon-arrowleft"></i>首页
+          <!--<i class="icon icon-user"></i>
+          <span class="text-ellipsis" name="userFullNameText"></span>-->
+        </a>
+        <h1 class="title  text-center">通讯录</h1>
+        <a class="titlebar-button button white outline loginOutBtn" style="padding:0 8px; visibility: hidden;">
+          <!-- <i class="icon icon-gear size20"></i>-->
+          <label>注销</label>
+        </a>
+      </div>
+    </header>
+    <article class="active has-header det-backcolor" id="main_article" data-role="article">
+      <div class="padding8 bg-white" id="chooseDiv" style="display: none;">
+          <div class="full-width">
+              当前部门:
+              <select id="chooseDeptList" style="line-height: 15px;width: 80%;">
+                  <!--<option selected value="1">部门1</option>
+                  <option value="2">部门2</option>
+                  <option value="3">部门3</option>
+                  <option value="4">部门4</option>-->
+              </select>
+          </div>
+      </div>
+      <div class="padding8 bg-white">
+        <div class="input-box">
+          <input type="text" placeholder="搜索" class="search">
+          <i class="color-placeholder icon icon-search" onclick="search();"></i>
+        </div>
+      </div>
+      <div class="bg-white padding8 dept-parent-line"><!-- id="routeWay"-->
+          <small class="text-center padding4 color333" style="font-size: 100%;" id="routeWay"></small>
+      </div>
+      <div class="bg-white">
+        <!--父级样例-->
+        <ul class="list noborder" id="tree">
+          <!--<li>
+            <div class="justify">
+              <div class="dept-photo bg-2">员</div>
+            </div>
+            <div class="justify-content dept-parent-line dept-parent-left" onclick="firstClick('dept0')">父级部门</div>
+            <div class="justify dept-parent-line dept-parent-right">
+              <i class="icon icon-arrowright"></i>
+            </div>
+          </li>-->
+          <!--注意最后一个class样式有差别-->
+          <!--<li>
+            <div class="justify-content dept-parent-left">父级部门</div>
+            <div class="justify dept-parent-right">
+              <i class="icon icon-arrowright"></i>
+            </div>
+          </li>-->
+        </ul>
+
+        <!--人员样例-->
+        <ul class="list border-content tbpadding8 det-backcolor" id="userlistid">
+          <!--<li class="bg-white mb8">
+            <div class="justify">
+              <div class="dept-photo bg-2">员</div>
+            </div>
+            <div class="justify-content nowrap box box box-middle noborder">
+              该级别部门下的人员
+            </div>
+          </li>-->
+        </ul>
+      </div>
+    </article>
+  </section>
+  <!---->
+  <section id="userList-section" data-role="section" >
+    <header>
+      <div class="titlebar reverse">
+        <!--<a class="titlebar-button"  href="javascript:back()">&lt;!&ndash; href="javascript:back()"&ndash;&gt;-->
+          <!--<i class="icon icon-arrowleft"></i>-->
+          <!--<i class="icon icon-user"></i>-->
+          <!--<span name="userFullNameText"></span>-->
+        <!--</a>-->
+        <h1 class="titlebar-title text-center text-ellipsis" id="headerTile"></h1>
+        <a class="titlebar-button button white outline loginOutBtn" style="padding:0 8px; visibility: hidden;">
+          <!-- <i class="icon icon-gear size20"></i>-->
+          <label>注销</label>
+        </a>
+      </div>
+
+    </header>
+    <article  class="active has-header"  data-role="article" id="refresh_article" data-scroll="pull">
+      <div class="scroller">
+        <div class="tree-box">
+          <ul id="content"></ul>
+        </div>
+      </div>
+    </article>
+  </section>
+</div>
+
+<!--人员详情弹框-->
+<script type="text/html" id="userInfoDialog">
+  <div style="padding:10px 10px;">
+    <div class="clearfix dept-parent-line mb8">
+      <div class="dept-photo nomargin float-left" id="lastnameid"></div>
+      <div class="peter-river txl-pop" name="userFullName"></div>
+    </div>
+
+    <div style="background-color: #e8e8e8;border: 1px solid #E5E5E2;">
+      <div class="row border-none">
+        <label class="row-left">性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别:</label>
+        <div class="row-right " name="userGender">
+        </div>
+      </div>
+      <div class="row border-none pr8">
+        <label class="row-left" >电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话:</label>
+        <div class="row-right " name="phone">
+        </div>
+        <!--<i class="icon icon-tel-fill nephritis"></i>-->
+      </div>
+      <div class="row border-none">
+        <label class="row-left">邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱:</label>
+        <div class="row-right " name="email">
+        </div>
+      </div>
+      <div class="row border-none"  style="margin-bottom: 20px">
+        <label class="row-left">所属部门:</label>
+        <div class="row-right " name="deptname">
+        </div>
+      </div>
+    </div>
+  </div>
+</script>
+<!--- third -->
+<script src="lib/third/jquery/jquery-2.1.3.min.js"></script>
+<script src="lib/third/iscroll/iscroll-probe.js"></script>
+<!---  agile -->
+<script type="text/javascript" src="lib/agile/js/agile.js"></script>
+<script src="cordova.js"></script>
+<!-- app -->
+<script type="text/javascript" src="lib/app/js/app.seedsui.js"></script>
+<script type="text/javascript" src="lib/custom/properties.js"></script>
+<script type="text/javascript" src="lib/custom/ui.js"></script>
+<script type="text/javascript" src="lib/custom/util.js"></script>
+<script src="script/deptList.js"></script>
+
+</body>
+</html>

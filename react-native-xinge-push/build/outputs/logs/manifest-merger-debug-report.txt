@@ -1,0 +1,137 @@
+-- Merging decision tree log ---
+manifest
+ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml:1:1-58:12
+INJECTED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml:1:1-58:12
+INJECTED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml:1:1-58:12
+INJECTED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml:1:1-58:12
+INJECTED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml:1:1-58:12
+INJECTED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml:1:1-58:12
+INJECTED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml:1:1-58:12
+	package
+		ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml:3:11-45
+		INJECTED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml
+		INJECTED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml
+	android:versionName
+		INJECTED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml
+		ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml:1:1-58:12
+		INJECTED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml
+	xmlns:tools
+		ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml:2:11-57
+	android:versionCode
+		INJECTED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml
+		ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml:1:1-58:12
+		INJECTED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml:1:11-69
+application
+ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml:5:5-57:19
+	android:supportsRtl
+		ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml:7:13-39
+	android:label
+		ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml:6:13-45
+receiver#com.jeepeng.react.xgpush.receiver.MessageReceiver
+ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml:8:9-16:20
+	android:exported
+		ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml:9:19-42
+	android:name
+		ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml:8:19-83
+intent-filter#action:name:com.tencent.android.tpush.action.FEEDBACK+action:name:com.tencent.android.tpush.action.PUSH_MESSAGE
+ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml:10:13-15:29
+action#com.tencent.android.tpush.action.PUSH_MESSAGE
+ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml:12:17-88
+	android:name
+		ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml:12:25-85
+action#com.tencent.android.tpush.action.FEEDBACK
+ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml:14:17-84
+	android:name
+		ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml:14:25-81
+receiver#com.tencent.android.hwpush.HWPushMessageReceiver
+ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml:17:9-28:20
+	android:name
+		ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml:17:19-82
+intent-filter#action:name:com.huawei.android.push.intent.CLICK+action:name:com.huawei.android.push.intent.RECEIVE+action:name:com.huawei.android.push.intent.REGISTRATION+action:name:com.huawei.intent.action.PUSH_STATE
+ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml:18:13-27:29
+action#com.huawei.android.push.intent.REGISTRATION
+ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml:20:17-86
+	android:name
+		ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml:20:25-83
+action#com.huawei.android.push.intent.RECEIVE
+ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml:22:17-81
+	android:name
+		ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml:22:25-78
+action#com.huawei.android.push.intent.CLICK
+ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml:24:17-79
+	android:name
+		ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml:24:25-76
+action#com.huawei.intent.action.PUSH_STATE
+ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml:26:17-78
+	android:name
+		ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml:26:25-75
+receiver#com.tencent.android.mipush.XMPushMessageReceiver
+ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml:29:9-41:20
+	android:exported
+		ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml:30:17-40
+	android:name
+		ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml:31:17-80
+intent-filter#action:name:com.xiaomi.mipush.RECEIVE_MESSAGE
+ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml:32:13-34:29
+action#com.xiaomi.mipush.RECEIVE_MESSAGE
+ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml:33:17-76
+	android:name
+		ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml:33:25-73
+intent-filter#action:name:com.xiaomi.mipush.MESSAGE_ARRIVED
+ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml:35:13-37:29
+action#com.xiaomi.mipush.MESSAGE_ARRIVED
+ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml:36:17-76
+	android:name
+		ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml:36:25-73
+intent-filter#action:name:com.xiaomi.mipush.ERROR
+ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml:38:13-40:29
+action#com.xiaomi.mipush.ERROR
+ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml:39:17-66
+	android:name
+		ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml:39:25-63
+receiver#com.tencent.android.mzpush.MZPushMessageReceiver
+ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml:42:9-56:20
+	android:name
+		ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml:42:19-82
+intent-filter#action:name:com.meizu.c2dm.intent.RECEIVE+action:name:com.meizu.c2dm.intent.REGISTRATION+action:name:com.meizu.flyme.push.intent.MESSAGE+action:name:com.meizu.flyme.push.intent.REGISTER.FEEDBACK+action:name:com.meizu.flyme.push.intent.UNREGISTER.FEEDBACK+category:name:com.jeepeng.react.xgpush
+ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml:43:13-55:29
+action#com.meizu.flyme.push.intent.MESSAGE
+ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml:45:17-78
+	android:name
+		ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml:45:25-75
+action#com.meizu.flyme.push.intent.REGISTER.FEEDBACK
+ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml:47:17-87
+	android:name
+		ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml:47:25-85
+action#com.meizu.flyme.push.intent.UNREGISTER.FEEDBACK
+ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml:49:17-89
+	android:name
+		ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml:49:25-87
+action#com.meizu.c2dm.intent.REGISTRATION
+ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml:51:17-77
+	android:name
+		ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml:51:25-74
+action#com.meizu.c2dm.intent.RECEIVE
+ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml:52:17-72
+	android:name
+		ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml:52:25-69
+category#com.jeepeng.react.xgpush
+ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml:54:17-68
+	android:name
+		ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml:54:27-66
+uses-sdk
+INJECTED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml
+INJECTED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml
+INJECTED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml
+INJECTED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml
+		ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml
+		INJECTED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml
+		ADDED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml
+		INJECTED from F:\intelij_project\CombieCordovaAndRN\react-native-xinge-push\src\main\AndroidManifest.xml

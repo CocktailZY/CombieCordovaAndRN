@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>设置</title>
+    <link rel="stylesheet" href="lib/agile/css/agile.layout.css">
+    <link rel="stylesheet" href="lib/third/seedsui/plugin/seedsui/seedsui.min.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<div id="section_container">
+    <!--设置主页面-->
+    <section id="main_section" data-role="section">
+        <!--头部-->
+        <header>
+            <div class="titlebar reverse">
+                <a class="titlebar-button" style="visibility: hidden;"><!-- href="index.html"-->
+                    返回
+                    <!-- href="javascript:back()"-->
+                    <!--<i class="icon icon-user"></i>
+                    <span class="text-ellipsis" name="userFullNameText"></span>-->
+                </a>
+                <h1 class="titlebar-title text-center">指纹验证</h1>
+                <a style="padding:0 8px; visibility: hidden;">
+                    <i class="icon icon-rdoadd size24"></i>
+                    <!--<label>注销</label>-->
+                </a>
+            </div>
+        </header>
+        <article class="active has-header bg-white" id="main_article" data-role="article">
+            <div class="box box-middlecenter full-width" id="box" style="padding-top: 30%;padding-bottom: 30px;">
+                <div class="case">
+                    <img width="80" height="80" class="" src="images/icon_fingerprint.png" style="opacity: 1;">
+                </div>
+            </div>
+            <div class="text-center margin8" style="margin: 20px 8px 70px 8px;">
+                <p>请验证指纹解锁</p>
+            </div>
+            <a class="radius4 button block" style="margin: 10px 50px 10px 50px;"
+               data-click="openFingerLock();">点击验证指纹</a>
+            <div class="full-width text-center"
+                 style="bottom: 8px !important;position: absolute;font-size: small;color: #aaaaaa;"
+                data-click="window.location.href='confirmPwd.html?type=other'"
+            >登录密码解锁
+            </div>
+        </article>
+    </section>
+</div>
+
+
+<!--- third -->
+<script src="lib/third/jquery/jquery-2.1.3.min.js"></script>
+<script src="lib/third/jquery/jquery.mobile.custom.min.js"></script>
+<script src="lib/third/iscroll/iscroll-probe.js"></script>
+<!--- agile -->
+<script type="text/javascript" src="lib/agile/js/agile.js"></script>
+<script src="cordova.js"></script>
+<!-- app -->
+<script type="text/javascript" src="lib/app/js/app.seedsui.js"></script>
+<script src="lib/md5.js"></script>
+<script type="text/javascript" src="lib/custom/properties.js"></script>
+<script type="text/javascript" src="lib/custom/ui.js"></script>
+<script type="text/javascript" src="lib/custom/util.js"></script>
+<script type="text/javascript">
+    $('#main_section').on('sectionshow', function(){
+        var params = Util.queryString('stepType');
+        if(params == 'toIndex'){
+            Util.setItem('stepLocation', 'index.html');
+        }
+        openFingerLock();
+    });
+    function openFingerLock() {
+        var encryptConfig = {
+            clientId: "com.zz.oa",
+            username: Util.getItem('username'),
+            password: Util.getItem('password')
+        }; // See config object for required parameters
+        FingerprintAuth.encrypt(encryptConfig, encryptSuccessCallback, encryptErrorCallback);//调用加密
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!-- HTML5文件 -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <title>省俯快递</title>
+    <link rel="stylesheet" href="lib/agile/css/agile.layout.css">
+    <link rel="stylesheet" href="lib/third/seedsui/plugin/seedsui/seedsui.min.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<div id="section_container">
+    <section id="express_section" data-role="section">
+        <header>
+            <div class="titlebar reverse">
+                <a class="titlebar-button" href="javascript:dback()">
+                    <i class="icon icon-arrowleft"></i>返回
+                </a>
+                <h1 class="titlebar-title text-center">省府快递</h1>
+                <a class="titlebar-button button white outline loginOutBtn" style="padding:0 8px; visibility: hidden">
+                    <!-- <i class="icon icon-gear size20"></i>-->
+                    <label>注销</label>
+                </a>
+            </div>
+            <div class="searchbar" style="background-color: #FFFFFF; padding: 3px 8px;">
+                <div class="input-box" style="margin-bottom: 0;" data-input="clear">
+                    <input type="search" placeholder="搜索..." class="search" id="searchText">
+                    <a style="text-align: center;" data-click="searchByGet();"><i class="icon icon-search color-placeholder"></i></a>
+                    <!--<i class="icon icon-clear-fill color-placeholder"></i>-->
+                </div>
+            </div>
+            <ul class="tabbar animate-slide bg-white padding8" data-col="3" id="doul">
+                <li class="tab lt-lb-Radius5 tlbBorder" data-role="tab" href="#telegraph" data-toggle="page"
+                    data-type="telegraph">
+                    <div class="sticker top right reportManageNew" style="display: none;"><span>NEW</span></div>
+                    <label class="tab-label">明传电报</label>
+                </li>
+                <li class="tab tbBorder lborder" data-role="tab" href="#provincialReceipt" data-toggle="page"
+                    data-type="provincialReceipt">
+                    <div class="sticker top right consultManageNew" style="display: none;"><span>NEW</span></div>
+                    <label class="tab-label">省直收文</label>
+                </li>
+                <li class="tab rt-rb-Radius5 trbBorder lborder" data-role="tab" href="#receiptManage" data-toggle="page"
+                    data-type="receiptManage">
+                    <div class="sticker top right doreportNew" style="display: none;"><span>NEW</span></div>
+                    <label class="tab-label">收文管理</label>
+                </li>
+            </ul>
+        </header>
+        <article class="active" data-role="article" id="express_article" data-scroll="verticle"
+                 style="top:160px;">
+            <div id="sliderPage" data-role="slider" class="full">
+                <div class="scroller">
+                    <div id="telegraph" class="slide" data-role="page" data-scroll="pulldown">
+                        <div class="scroller">
+                            <ul class="list self-list">
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div id="provincialReceipt" class="slide" data-role="page" data-scroll="pulldown">
+                        <div class="scroller">
+                            <ul class="list self-list">
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div id="receiptManage" class="slide" data-role="page" data-scroll="pulldown">
+                        <div class="scroller">
+                            <ul class="list self-list">
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+        <!--<footer>
+            <ul class="menubar bar-footer-fixed tabbar-footer">
+                <li class="tab" onclick="window.location.href='index.html'">
+                    <i class="icon icon-home"></i>
+                    <label class="tab-label">首页</label>
+                </li>
+                <li class="tab active" onclick="window.location.href='toDoList.html'">
+                    <i class="icon icon-fileperson"></i>
+                    <label class="tab-label">待办</label>
+                </li>
+                <li class="tab" onclick="window.location.href='toSignList.html'">
+                    <i class="icon icon-write"></i>
+                    <label class="tab-label">待签</label>
+                </li>
+                <li class="tab" onclick="window.location.href='workRing.html'">
+                    <i class="icon icon-fweixin"></i>
+                    <label class="tab-label">工作圈</label>
+                </li>
+                <li class="tab" onclick="window.location.href='setting.html'">
+                    <i class="icon icon-person"></i>
+                    <label class="tab-label">我的</label>
+                </li>
+            </ul>
+        </footer>-->
+    </section>
+</div>
+
+
+<!--- third -->
+<script src="lib/third/jquery/jquery-2.1.3.min.js"></script>
+<script src="lib/third/jquery/jquery.mobile.custom.min.js"></script>
+<script src="lib/third/iscroll/iscroll-probe.js"></script>
+<!---  agile -->
+<script type="text/javascript" src="lib/agile/js/agile.js"></script>
+<script src="cordova.js"></script>
+<!-- app -->
+<script type="text/javascript" src="lib/app/js/app.seedsui.js"></script>
+<script type="text/javascript" src="lib/custom/properties.js"></script>
+<script type="text/javascript" src="lib/custom/ui.js"></script>
+<script type="text/javascript" src="lib/custom/util.js"></script>
+<script type="text/javascript" src="script/express.js"></script>
+
+</body>
+</html>
